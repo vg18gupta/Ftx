@@ -32,8 +32,15 @@ export default function Login() {
             return setErrorMessage(error.message);
         }
     }
+    function handleBackClick() {
+        history(-1)
+    }
     return (
-        <div classname="parent-container">
+        <div className="login-parent-container">
+            <div className="login-parent">
+                <div className="backIcon" onClick={handleBackClick}>
+                    <img height="40px" width="40px" src="https://static.thenounproject.com/png/344330-200.png" />
+                </div>
             <div id="card">
                 <div id="card-content">
                 <div id="card-title">
@@ -57,6 +64,7 @@ export default function Login() {
                     <a href="#" id="signup">Don't have account yet?</a>
                 </form>
                 </div>
+            </div>
             </div>
         </div>
     )

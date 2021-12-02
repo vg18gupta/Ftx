@@ -1,29 +1,70 @@
 import { useState } from 'react'
+import firebase from "firebase/compat";
+import { useNavigate } from "react-router-dom";
 import './Signup.css';
 
 export default function Login() {
+    const history = useNavigate();
+    const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business"})
     const [name, setName] = useState('Name');
-    const [type, setType] = useState('Business');
+    const [errorMessage, setErrorMessage] = useState('');
     function handleEmailChange(e) {
-        console.log(e.target.value)
+        signUpSet({...signUp, email: e.target.value})
     }
     function handlePasswordChange(e) {
-        console.log(e.target.value)
+        signUpSet({...signUp, password: e.target.value})
     }
-    function handleSubmitClick() {
-        console.log("submit")
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    async function handleSubmitClick() {
+        try{
+            const credentials = await firebase.auth().createUserWithEmailAndPassword(signUp.email, signUp.password);
+            await credentials.user?.updateProfile({displayName: `${signUp.name}`});
+            let userData = {
+                name: signUp.fname,
+                email: signUp.email,
+                password: signUp.password,
+                userType: signUp.type
+            }
+            setCookie(signUp.email, {isLogedin: true, type: signUp.type}, 1)
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            };
+            await fetch("/api/add_user", requestOptions)
+            history('/')
+           
+        }
+        catch(error){
+            return setErrorMessage(error.message);
+        }
     }
     function handleNameChange(e) {
-        console.log(e.target.value)
+        signUpSet({...signUp, name: e.target.value})
     }
     function handleTypeChange(e) {
         console.log(e.target.value)
-        // if(myRadio.value === 'Customer') {
-        //     setName('Shop Name')
-        // }
+        if(e.target.value === 'Customer') {
+            setName('Name')
+        }else { 
+            setName('Shop Name')
+        }
+        signUpSet({...signUp, type: e.target.value})
+    }
+    function handleBackClick() {
+        history(-1)
     }
     return (
-        <div classname="parent-container">
+        <div className="signup-parent-container">
+            <div className="signup-parent">
+                <div className="backIcon" onClick={handleBackClick}>
+                    <img height="40px" width="40px" src="https://static.thenounproject.com/png/344330-200.png" />
+                </div>
             <div id="card">
                 <div id="card-content">
                 <div id="card-title">
@@ -55,6 +96,7 @@ export default function Login() {
                     <button id="submit-btn"  onClick={handleSubmitClick}>Submit</button>
                 </form>
                 </div>
+            </div>
             </div>
         </div>
     )
