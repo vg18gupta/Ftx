@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 
 export default function Header() {
+    const history = useNavigate();
         return ( 
         <header id="masthead" className="parent-header">
                 <div id="header-sticky">
@@ -19,11 +20,11 @@ export default function Header() {
                         <nav className="main-navigation--right">
                             <div className="menu-primary-right-buttons-container">
                                 <ul id="primary-menu-right-button" className="menu">
-                                    <li id="menu-item-2887" className="login-menu button">
-                                        <p><Link to="/aboutus">About us</Link></p>
+                                    <li id="menu-item-2887" className="login-menu button"  onClick={()=>{history('/aboutus')}}>
+                                        <p>About us</p>
                                     </li>
-                                    <li id="menu-item-2889" className="signup-menu button">
-                                        <p><Link to="/signup">Sign Up</Link></p>
+                                    <li id="menu-item-2889" className="signup-menu button"  onClick={()=>{history('/signup')}}>
+                                        <p>Sign Up</p>
                                     </li>
                                 </ul>
                             </div>                

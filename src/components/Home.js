@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from './Header'
 import './Home.css';
 
 
 export default function Home() {
+    const history = useNavigate();
     const [isLogedIn, setIsLogedIn] = useState(true);
     return (
         <div>
@@ -24,7 +25,7 @@ export default function Home() {
                                     <span>We are the market-leading technical</span> <span>interview platform to identify and hire developers wherever they are.
                                     </span>
                                 </p>
-                                <div className="login-button"><Link to="/business/login">Login</Link></div>
+                                <div className="login-button"  onClick={()=>{history('/business/login')}}>Login</div>
                             </div>
                             <div className="signup-container">
                                 <h3 class="login-heading">
@@ -34,7 +35,7 @@ export default function Home() {
                                     <span>We are the market-leading technical</span> <span>interview platform to identify and hire developers wherever they are.
                                     </span>
                                 </p>
-                                <div className="login-button"><Link to="/customer/login">Login</Link></div>
+                                <div className="login-button" onClick={()=>{history('/customer/login')}}>Login</div>
                             </div>
                         </div>
                     </div>

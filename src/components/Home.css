@@ -54,6 +54,9 @@
     justify-content: center;
     align-items: center;
     height: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
   background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
   border: none;
   border-radius: 10px;
@@ -70,9 +73,4 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-}
-.login-button a{
-    text-decoration: none;
-    font-size: 18px;
-    color: #ffffff;
 }

@@ -61,7 +61,7 @@ export default function Login() {
                         <legend id="forgot-pass">Forgot password?</legend>
                     </a> */}
                     <div id="submit-btn"  onClick={handleSubmitClick}>Submit</div>
-                    <a href="#" id="signup">Don't have account yet?</a>
+                    <p id="signup"  onClick={()=>{history('/signup')}}>Don't have account yet?</p>
                 </form>
                 </div>
             </div>
