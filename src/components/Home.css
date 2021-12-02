@@ -1,0 +1,78 @@
+
+.left-container {
+
+}
+.about-parent-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    font-size: 50px;
+    color: #576871;
+}
+.parent-container {
+    background-color: #FFFFFF;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 1170px;
+    padding-left: 15px;
+    padding-right: 15px; 
+}
+.login-signup-container {  
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.login-container {
+    padding: 20px;
+    padding-left: 0;
+    margin-right: 20px;
+}
+.signup-container {
+    padding: 20px;
+    padding-left: 0;
+}
+.login-heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #39424e;
+
+}
+.about-business {
+    font-weight: 400;
+    font-size: 1.231rem;
+    color: #576871;
+    vertical-align: baseline;
+}
+.about-customer {
+    font-weight: 400;
+    font-size: 1.231rem;
+    color: #576871;
+    vertical-align: baseline;
+}
+.login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+  background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px #24c64f;
+  cursor: pointer;
+  color: white;
+  font-family: "Raleway SemiBold", sans-serif;
+  height: 42.3px;
+  margin: 0 auto;
+  margin-top: 50px;
+  transition: 0.25s;
+  width: 153px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+.login-button a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+}
