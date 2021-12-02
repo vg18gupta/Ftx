@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import mainLogo from'../Static/logo.png';
 import './Header.css';
 
 
@@ -10,8 +11,8 @@ export default function Header() {
                     <div className="container">
 
                         <div className="site-branding">
-                            <a href="https://www.hackerrank.com/developer-skills-platform" className="custom-logo-link" rel="home" title="Hackerrank">
-                                <img width="220" height="70" src="https://cdn5.vectorstock.com/i/1000x1000/92/59/simple-lettering-bold-random-logo-vector-33589259.jpg" className="custom-logo" alt="Logo" loading="lazy" /></a>                </div>
+                            <a className="custom-logo-link" rel="home" title="Rewardo" onClick={()=>{history('/')}}>
+                                <img width="220" height="70" src={mainLogo} className="custom-logo" alt="Logo" loading="lazy" /></a>                </div>
 
 
                         <nav id="site-navigation" className="main-navigation">

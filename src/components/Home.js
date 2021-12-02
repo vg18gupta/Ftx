@@ -22,7 +22,7 @@ export default function Home() {
                                     <span class="login-heading-text">For Business</span>
                                 </h3>
                                 <p class="about-business">
-                                    <span>We are the market-leading technical</span> <span>interview platform to identify and hire developers wherever they are.
+                                    <span>Login to create rewards, earn trust and grow your business with us.
                                     </span>
                                 </p>
                                 <div className="login-button"  onClick={()=>{history('/business/login')}}>Login</div>
@@ -32,7 +32,7 @@ export default function Home() {
                                     <span class="login-heading-text">For Customers</span>
                                 </h3>
                                 <p class="about-customer">
-                                    <span>We are the market-leading technical</span> <span>interview platform to identify and hire developers wherever they are.
+                                    <span>Login to get discounts on your favourite products from your favourite shops.
                                     </span>
                                 </p>
                                 <div className="login-button" onClick={()=>{history('/customer/login')}}>Login</div>
