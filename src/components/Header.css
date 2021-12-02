@@ -18,6 +18,12 @@
 .site-branding {
     flex: 0 1 auto;
 }
+.avatar {
+    margin-left: 20px;
+}
+.avatar img {
+    border-radius: 50%;
+}
 .main-navigation {
     padding-left: 45px;
     padding-right: 45px;
@@ -34,6 +40,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     flex-direction: row;
     font-size: 1em;
     position: relative;

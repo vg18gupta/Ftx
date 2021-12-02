@@ -3,7 +3,7 @@ import firebase from "firebase/compat";
 import { useNavigate } from "react-router-dom";
 import './Signup.css';
 
-export default function Login() {
+export default function SignUp() {
     const history = useNavigate();
     const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business"})
     const [name, setName] = useState('Name');
@@ -18,7 +18,7 @@ export default function Login() {
         const d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = "user" + "=" + JSON.stringify(cvalue) + ";" + expires + ";path=/";
     }
     async function handleSubmitClick() {
         try{
@@ -30,15 +30,19 @@ export default function Login() {
                 password: signUp.password,
                 userType: signUp.type
             }
-            setCookie(signUp.email, {isLogedin: true, type: signUp.type}, 1)
+            setCookie(signUp.email, {isLogedIn: true, type: signUp.type}, 1)
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             };
             await fetch("/api/add_user", requestOptions)
-            history('/')
-           
+            if(signUp.type === 'Customer') {
+                history('/customer/dashboard');
+            }else {
+                history('/business/dashboard');
+            }
+            
         }
         catch(error){
             return setErrorMessage(error.message);
@@ -93,7 +97,7 @@ export default function Login() {
                         <input className="radio-first" type="radio" value="Business" name="gender" checked="checked" onChange={handleTypeChange}/> Bussiness
                         <input className="radio-second" type="radio" value="Customer" name="gender"  onChange={handleTypeChange}/> Customer
                     </div>
-                    <button id="submit-btn"  onClick={handleSubmitClick}>Submit</button>
+                    <div id="submit-btn"  onClick={handleSubmitClick}>Submit</div>
                 </form>
                 </div>
             </div>

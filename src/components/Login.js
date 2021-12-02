@@ -19,14 +19,17 @@ export default function Login() {
         const d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = "user" + "=" + JSON.stringify(cvalue)  + ";" + expires + ";path=/";
     }
     async function handleSubmitClick() {
         try{
             await firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password);
-            //reset();
-            setCookie(loginData.email, {isLogedin: true, type: type}, 1)
-            history('/');
+            setCookie(loginData.email, {isLogedIn: true, type: type}, 1)
+            if(type === "customer"){
+                history('/customer/dashboard');
+            }else {
+                history('/business/dashboard');
+            }
         }
         catch (error){
             return setErrorMessage(error.message);
