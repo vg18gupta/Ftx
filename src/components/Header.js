@@ -48,9 +48,9 @@ export default function Header({}) {
                         <nav className="main-navigation--right">
                             <div className="menu-primary-right-buttons-container">
                                 <ul id="primary-menu-right-button" className="menu">
-                                    <li id="menu-item-2887" className="login-menu button"  onClick={()=>{history('/aboutus')}}>
+                                    {/* <li id="menu-item-2887" className="login-menu button"  onClick={()=>{history('/aboutus')}}>
                                         <p>About us</p>
-                                    </li>
+                                    </li> */}
                                     {
                                         isLogedIn === false 
                                         ? (

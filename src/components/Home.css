@@ -19,6 +19,10 @@
     padding-left: 15px;
     padding-right: 15px; 
 }
+.secondary {
+    font-size: 22px;
+    padding-right: 20px;
+}
 .login-signup-container {  
     display: grid;
     grid-template-columns: auto auto;
