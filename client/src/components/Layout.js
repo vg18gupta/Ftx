@@ -5,11 +5,11 @@ import './Layout.css';
 
 const { Header, Footer, Content } = Layout;
 
-const LayoutWrapper = ({ children }) => {
+const LayoutWrapper = ({ children, setIsTxnModalVisible }) => {
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout>
       <Header className="header-sticky">
-        <HeaderContent />
+        <HeaderContent setIsTxnModalVisible={setIsTxnModalVisible} />
       </Header>
       <Content className="content">{children}</Content>
       <Footer className="footer">&copy; 2021 Rewardo</Footer>

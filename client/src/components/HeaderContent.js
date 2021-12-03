@@ -5,8 +5,9 @@ import { UserOutlined, DownOutlined } from '@ant-design/icons';
 import logo from '../Static/logo.png';
 import { AuthContext } from '../context/authContext';
 import './Header.css';
+import { PlusOutlined } from '@ant-design/icons';
 
-export default function Header() {
+export default function Header({ setIsTxnModalVisible }) {
   const authContext = useContext(AuthContext);
   const menu = (
     <Menu>
@@ -31,25 +32,41 @@ export default function Header() {
 
   const [dropList, setDropList] = useState(false);
   const setDrop = () => {
-      <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          Hover me <DownOutlined />
-        </a>
-      </Dropdown>
-  }
+    <Dropdown overlay={menu}>
+      <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+        Hover me <DownOutlined />
+      </a>
+    </Dropdown>;
+  };
 
   return (
     <Row justify="space-between" align="middle">
       <a href="/">
         <img src={logo} alt="logo" height="40"></img>
       </a>
-      {!authContext.isAuthenticated() ? (
-        <a href="/signup">
-          <Button style={{backgroundColor: "#51CC71", borderRadius: "10px"}} type="primary">Sign Up</Button>
-        </a>
-      ) : (
-        <Avatar style={{ backgroundColor: '#00ff80' }} icon={<UserOutlined />} onClick={setDrop} />
-      )}
+      <div>
+        <Button
+          type="link"
+          icon={<PlusOutlined />}
+          style={{ color: '#51CC71', marginRight: '30px' }}
+          onClick={() => setIsTxnModalVisible(true)}
+        >
+          Add New Transaction
+        </Button>
+        {!authContext.isAuthenticated() ? (
+          <a href="/signup">
+            <Button style={{ backgroundColor: '#51CC71', borderRadius: '5px' }} type="primary">
+              Sign Up
+            </Button>
+          </a>
+        ) : (
+          <Avatar
+            style={{ backgroundColor: '#00ff80' }}
+            icon={<UserOutlined />}
+            onClick={setDrop}
+          />
+        )}
+      </div>
     </Row>
   );
 }

@@ -53,7 +53,27 @@ def customers():
 @app.route('/api/global_customers', methods =['GET'])
 def global_customers():
   customers = User.query.filter(User.type == "Customer").all()
-  return jsonify(users_schema.dump(customers)) 
+
+  response_list = []
+  for customer in customers:
+    #if customer hasn't visited this business, return 0 rewards, else return existing reward
+    existing_customer = db.session.query(Reward).get({
+      "customerId" : customer.id,
+      "businessId" : int(request.args["business_id"])
+    })
+    customer_dict = {
+        "id": customer.id,
+        "name": customer.name,
+        "email": customer.email,
+        "phone": customer.phone
+      }
+    if(existing_customer is None):
+      customer_dict["reward"] = 0
+    else:
+      customer_dict["reward"] = existing_customer.current_reward
+    response_list.append(customer_dict)
+    
+  return jsonify(response_list) 
 
 #adds a new transaction between a business and a customer
 @app.route('/api/add_transaction', methods =['POST'])
