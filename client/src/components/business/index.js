@@ -80,8 +80,8 @@ const data = [
 
 export default function BusinessDashboard() {
   const [customerData, setCustomerData] = useState([])
+  const [allcustomerData, setallCustomerData] = useState([])
   const authContext = useContext(AuthContext);
-  console.log(authContext?.authState);
   const id = authContext?.authState?.id;
   function getcustomerData() {
     fetch(`/api/customers?business_id=${id}`,{
@@ -98,6 +98,23 @@ export default function BusinessDashboard() {
         console.log(err)
       })
   }
+    function getallcustomerData() {
+    fetch(`/api/global_customers`,{
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "GET",
+      })
+      .then(res => {return res.json();})
+      .then(data => {
+        setallCustomerData(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  //add transaction API 
+
   // function postTransaction() {
   //   const data = {
   //     "business_id": id,
@@ -118,14 +135,16 @@ export default function BusinessDashboard() {
   //       console.log(err)
   //     })
   // }
+
   useEffect(()=>{
-    getcustomerData();
+    //getcustomerData();
+    getallcustomerData();
   },[])
   return (
     <LayoutWrapper>
       <div className="customer-dashboard-parent">
         <div className="customer-parent-children">
-          <Table columns={columns} dataSource={customerData} />
+          <Table columns={columns}  dataSource={data} />
         </div>
       </div>
     </LayoutWrapper>

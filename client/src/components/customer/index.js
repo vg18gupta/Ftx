@@ -1,88 +1,82 @@
-import { useEffect } from 'react';
-import { Table, Tag, Space } from 'antd';
+import { useEffect, useState, useContext } from 'react';
+import { Card, Col, Row } from 'antd';
+import { TrophyOutlined, ShopOutlined, DollarCircleOutlined } from '@ant-design/icons'
+import { AuthContext } from '../../context/authContext';
 import 'antd/dist/antd.css';
-import './index.css';
 import LayoutWrapper from '../Layout';
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (tags) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+import './index.css';
 
 export default function CustomerDashboard() {
+  const authContext = useContext(AuthContext);
+  const id = authContext?.authState?.id;
+  const [ rewardData, setRewardData ] = useState([])
+  function getReward() {
+    fetch(`/api/customer_rewards?customer_id=${id}`,{
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "GET",
+      })
+      .then(res => {return res.json();})
+      .then(data => {
+        setRewardData(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  useEffect(() => {
+    getReward();
+  }, [])
   return (
     <LayoutWrapper>
       <div className="customer-dashboard-parent">
         <div className="customer-parent-children">
-          <Table columns={columns} dataSource={data} />
+          {/* <div className="site-card-wrapper">
+            <Row gutter={16}>
+              {
+                rewardData?.map((item, index) => {
+                  console.log(item)
+                  return (
+                    <Col span={8} key={index}>
+                      <Card title={item.shop_name} bordered={false}>
+                        {item.current_reward}
+                        <TrophyOutlined />
+                      </Card>
+                    </Col>
+                  )
+                })
+              }
+            </Row>
+          </div> */}
+          <div className="site-card-wrapper">
+          {
+            rewardData?.map((item, index) => {
+                  console.log(item)
+                  return (
+                    <Row gutter={16} style={{ minWidth: "0px", marginRight: "90px"}}>
+                      <Card
+                        hoverable
+                      >
+                        <ShopOutlined style={{ width: 250 }}/>
+                        <Card title={item.shop_name} bordered={false}>
+                          <div className="card-reward-parent">
+                            {item.current_reward}
+                            <TrophyOutlined />
+                          </div>
+                        </Card>
+                        <Card bordered={false}>
+                          <div className="card-reward-parent">
+                            {item.total_cash_earned}
+                            <DollarCircleOutlined />
+                          </div>
+                        </Card>
+                      </Card>
+                    </Row>
+                  )
+                })
+          }
+          </div>
         </div>
       </div>
     </LayoutWrapper>

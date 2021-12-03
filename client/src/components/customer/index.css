@@ -7,3 +7,22 @@
   width: 1170px;
   margin-top: 60px;
 }
+.site-card-wrapper {
+  display: flex;
+}
+/* .ant-row {
+  min-width: 0px;
+  margin-right: 90px !important;
+} */
+
+.anticon-shop svg{
+  font-size: 45px;
+}
+.ant-card-head-title {
+  display: flex;
+  justify-content: center;
+}
+.card-reward-parent {
+  display: flex;
+  justify-content: space-between;
+}

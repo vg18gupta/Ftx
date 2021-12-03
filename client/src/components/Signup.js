@@ -2,6 +2,7 @@ import { useState, useContext } from 'react'
 import firebase from "firebase/compat";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/authContext';
+import { openNotification } from './Notification';
 import './Signup.css';
 
 export default function SignUp() {
@@ -84,7 +85,7 @@ export default function SignUp() {
             await registerUser() 
         }
         catch(error){
-            return setErrorMessage(error.message);
+            openNotification(error.message)
         }
     }
     function handleNameChange(e) {

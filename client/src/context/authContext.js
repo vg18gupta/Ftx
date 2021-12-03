@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
 
   const setAuthInfo = (cname, cvalue, exdays) => {
     console.log('setting auth info', cvalue);
-    Cookies.set(cname, JSON.stringify(cvalue), { expires: exdays, path: '/' });
+    Cookies.set('user', JSON.stringify(cvalue), { expires: exdays, path: '/' });
     setAuthState(cvalue);
   };
 

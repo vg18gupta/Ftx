@@ -50,6 +50,11 @@ def customers():
   customers = Reward.query.filter( Reward.businessId == request.args["business_id"]).all()
   return jsonify(rewards_schema.dump(customers)) 
 
+@app.route('/api/global_customers', methods =['GET'])
+def global_customers():
+  customers = User.query.filter(User.type == "Customer").all()
+  return jsonify(users_schema.dump(customers)) 
+
 #adds a new transaction between a business and a customer
 @app.route('/api/add_transaction', methods =['POST'])
 def add():
@@ -100,6 +105,22 @@ def add():
       'message': 'Successfully added transaction.'
   }
   return make_response(responseObject, 200)
+
+#fetch list of rewards from all businesses for a customer
+@app.route('/api/customer_rewards', methods =['GET'])
+def customer_rewards():  
+  join_results = db.session.query(User, Reward).filter(Reward.businessId == User.id
+  ).filter(Reward.customerId == 1).all()
+
+  response_list = []
+  for (user, reward) in join_results:
+    response_list.append({
+      "shop_name": user.name,
+      "current_reward": reward.current_reward,
+      "total_cash_earned": 100
+    })
+  print(response_list)
+  return jsonify(response_list) 
 
 #fetch list of customers for a given business_id
 @app.route('/api/user_table', methods =['GET'])
