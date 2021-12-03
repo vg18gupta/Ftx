@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Table, Tag, Space } from 'antd';
 import 'antd/dist/antd.css';
+import { AuthContext } from '../../context/authContext';
 import './index.css';
 import LayoutWrapper from '../Layout';
 
@@ -78,11 +79,53 @@ const data = [
 ];
 
 export default function BusinessDashboard() {
+  const [customerData, setCustomerData] = useState([])
+  const authContext = useContext(AuthContext);
+  console.log(authContext?.authState);
+  const id = authContext?.authState?.id;
+  function getcustomerData() {
+    fetch(`/api/customers?business_id=${id}`,{
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "GET",
+      })
+      .then(res => {return res.json();})
+      .then(data => {
+        setCustomerData(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  // function postTransaction() {
+  //   const data = {
+  //     "business_id": id,
+  //     "customer_id": ,
+  //     "redeem_amount": ,
+  //     "transaction_amount": 
+  //   }
+  //   fetch('/api/register',
+  //     {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(data)
+  //     })
+  //     .then(res => {
+  //       getId();
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
+  useEffect(()=>{
+    getcustomerData();
+  },[])
   return (
     <LayoutWrapper>
       <div className="customer-dashboard-parent">
         <div className="customer-parent-children">
-          <Table columns={columns} dataSource={data} />
+          <Table columns={columns} dataSource={customerData} />
         </div>
       </div>
     </LayoutWrapper>

@@ -19,7 +19,7 @@ export default function Login() {
     setLoginData({ ...loginData, password: e.target.value });
   }
       function getId() {
-        fetch(`/api/id?email=${loginData.email}`,
+        return fetch(`/api/id?email=${loginData.email}`,
             {
                 headers: {
                 'Accept': 'application/json',
@@ -31,12 +31,7 @@ export default function Login() {
               return res.json();
             })
             .then(id => {
-              authContext.updateAuthState(id);
-              if (type === 'customer') {
-                history('/customer/dashboard');
-              } else {
-                history('/business/dashboard');
-              }
+              return id;
             })
             .catch(err => {
                 console.log(err)
@@ -45,8 +40,13 @@ export default function Login() {
   async function handleSubmitClick() {
     try {
       await firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password);
-      authContext.setAuthInfo(loginData.email, { isLoggedIn: true, type: type }, 1);
-      getId();
+      const id = await getId();
+      authContext.setAuthInfo(loginData.email, { isLoggedIn: true, type: type, id: id }, 1);
+      if (type === 'customer') {
+        history('/customer/dashboard');
+      } else {
+        history('/business/dashboard');
+      }
     } catch (error) {
       return setErrorMessage(error.message);
     }
