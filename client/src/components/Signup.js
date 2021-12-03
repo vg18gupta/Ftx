@@ -5,7 +5,7 @@ import './Signup.css';
 
 export default function SignUp() {
     const history = useNavigate();
-    const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business", phonemumber: ""})
+    const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business", phonenumber: ""})
     const [name, setName] = useState('Name');
     const [errorMessage, setErrorMessage] = useState('');
     function handleEmailChange(e) {
@@ -25,16 +25,13 @@ export default function SignUp() {
                 "name": signUp.name,
                 "email": signUp.email,
                 "type": signUp.type,
-                "phone": signUp.phonemumber
+                "phone": signUp.phonenumber
             }
-        fetch('http://ee2c-122-163-249-4.ngrok.io/api/register',
+        fetch('/api/register',
             {
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: data
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
             })
             .then(res => {
                 console.log(res,"sucess")
@@ -44,7 +41,7 @@ export default function SignUp() {
             })
     }    
     function getId() {
-        fetch(`http://ee2c-122-163-249-4.ngrok.io/api/id?email=${signUp.email}&type=${signUp.type}`,
+        fetch(`/api/id?email=${signUp.email}&type=${signUp.type}`,
             {
                 headers: {
                 'Accept': 'application/json',
@@ -75,9 +72,10 @@ export default function SignUp() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             };
+            await fetch("/api/add_user", requestOptions)
             const promise=[];
             promise.push(registerUser());
-            promise.push(getId())
+            //promise.push(getId())
             promise.all(promise)
             .then(()=>{
                 if(signUp.type === 'Customer') {
@@ -108,7 +106,7 @@ export default function SignUp() {
         history(-1)
     }
     function handlePhonenumberChange(e) {
-        signUpSet({...signUp, phonemumber: e.target.value})
+        signUpSet({...signUp, phonenumber: e.target.value})
     }
     return (
         <div className="signup-parent-container">
@@ -137,9 +135,9 @@ export default function SignUp() {
                     </label>
                     <input id="user-password" class="form-content" type="password" name="password" required onChange={handlePasswordChange}/>
                     <div class="form-border"></div>
-                    <label className="user-phonemumber" for="user-phonemumber">&nbsp;Phonemumber
+                    <label className="user-phonenumber" for="user-phonenumber">&nbsp;phonenumber
                     </label>
-                    <input id="user-phonemumber" class="form-content" type="mumber" name="phonemumber" required onChange={handlePhonenumberChange}/>
+                    <input id="user-phonenumber" class="form-content" type="mumber" name="phonenumber" required onChange={handlePhonenumberChange}/>
                     <div class="form-border"></div>
                     {/* <a id="forgot-pass-parent" href="#">
                         <legend id="forgot-pass">Forgot password?</legend>

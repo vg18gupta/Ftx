@@ -19,7 +19,7 @@ export default function Login() {
     setLoginData({ ...loginData, password: e.target.value });
   }
       function getId() {
-        fetch(`http://ee2c-122-163-249-4.ngrok.io/api/id?email=${loginData.email}&type=${type}`,
+        fetch(`/api/id?email=${loginData.email}&type=${type}`,
             {
                 headers: {
                 'Accept': 'application/json',
