@@ -28,10 +28,10 @@ export default function Login() {
                 method: "GET",
             })
             .then(res => {
-              res.json();
+              return res.json();
             })
-            .then(data=>{
-              console.log(data,"idddd")
+            .then(id => {
+              authContext.updateAuthState(id);
               if (type === 'customer') {
                 history('/customer/dashboard');
               } else {

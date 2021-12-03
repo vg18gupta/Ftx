@@ -15,6 +15,30 @@ export default function SignUp() {
     }
     function handlePasswordChange(e) {
         signUpSet({...signUp, password: e.target.value})
+    }    
+    function getId() {
+        fetch(`/api/id?email=${signUp.email}&type=${signUp.type}`,
+            {
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method: "GET",
+            })
+            .then(res => {
+              return res.json();
+            })
+            .then(id => {
+                authContext.updateAuthState(id);
+                if(signUp.type === 'Customer') {
+                    history('/customer/dashboard');
+                } else {
+                    history('/business/dashboard');
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     function registerUser() {
         const data = {
@@ -30,28 +54,7 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             })
             .then(res => {
-                console.log(res,"sucess")
-                if(signUp.type === 'Customer') {
-                    history('/customer/dashboard');
-                } else {
-                    history('/business/dashboard');
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }    
-    function getId() {
-        fetch(`/api/id?email=${signUp.email}&type=${signUp.type}`,
-            {
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                method: "GET",
-            })
-            .then(res => {
-                console.log(res,"sucess")
+                getId();
             })
             .catch(err => {
                 console.log(err)

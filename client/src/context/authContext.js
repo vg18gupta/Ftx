@@ -37,6 +37,9 @@ const AuthProvider = ({ children }) => {
     history('/login');
   };
 
+  const updateAuthState = (id) => {
+    setAuthState({...authState, id: id});
+  }
   return (
     <Provider
       value={{
@@ -45,6 +48,7 @@ const AuthProvider = ({ children }) => {
         isAuthenticated,
         logout,
         isBusiness,
+        updateAuthState,
       }}
     >
       {children}
