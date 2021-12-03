@@ -144,10 +144,10 @@ This app can be used to incentivize customers to shop more to further accumualat
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Add personalised offerings
-- [] Include Payments directly from our app
-- [] Get Funding!
-- [] Open it for Public use!
+-  Add personalised offerings
+-  Include Payments directly from our app
+-  Get Funding!
+-  Open it for Public use!
 
 See the [open issues](https://github.com/vg18gupta/issues) for a full list of proposed features (and known issues).
 
@@ -172,10 +172,10 @@ Project Link: [https://github.com/vg18gupta/Ftx](vg18gupta)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [](https://github.com/abhiroopdutta)
-* [](https://github.com/Prateekj7)
-* [](https://github.com/CKanishka)
-* [](https://github.com/vg18gupta/)
+* [https://github.com/abhiroopdutta]()
+* [https://github.com/Prateekj7]()
+* [https://github.com/CKanishka]()
+* [https://github.com/vg18gupta]()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
