@@ -1,41 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cover from '../Static/cover.png';
 import './Home.css';
 import LayoutWrapper from './Layout';
+import { AuthContext } from '../context/authContext';
 
 export default function Home() {
   const history = useNavigate();
-  const [isLogedIn, setIsLogedIn] = useState(false);
-  function getCookie(name) {
-    var dc = document.cookie;
-    var prefix = name + '=';
-    var begin = dc.indexOf('; ' + prefix);
-    if (begin == -1) {
-      begin = dc.indexOf(prefix);
-      if (begin != 0) return null;
-    } else {
-      begin += 2;
-      var end = document.cookie.indexOf(';', begin);
-      if (end == -1) {
-        end = dc.length;
-      }
-    }
-    return decodeURI(dc.substring(begin + prefix.length, end));
-  }
-
-  useEffect(() => {
-    var myCookie = JSON.parse(getCookie('user'));
-    if (myCookie !== null) {
-      setIsLogedIn(myCookie.isLogedIn);
-    }
-  }, []);
+  const authContext = useContext(AuthContext);
   return (
     <LayoutWrapper>
       <div className="about-parent-container">
         <div className="parent-container">
           <div className="left-container">
-            {isLogedIn != true ? (
+            {!authContext.isAuthenticated() ? (
               <>
                 <div className="about-container">
                   Matching customers <br />
@@ -103,7 +81,7 @@ export default function Home() {
             )}
           </div>
           <div className="right-container">
-            {isLogedIn != true ? (
+            {!authContext.isAuthenticated() ? (
               <img
                 width="520"
                 src="https://thevault.exchange/resources/wp-content/uploads/2021/03/74-743103_listening-to-customers-png-happy-customer-png-transparent.png"

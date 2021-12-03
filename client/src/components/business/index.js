@@ -77,7 +77,7 @@ const data = [
   },
 ];
 
-export default function CustomerDashboard() {
+export default function BusinessDashboard() {
   return (
     <LayoutWrapper>
       <div className="customer-dashboard-parent">
