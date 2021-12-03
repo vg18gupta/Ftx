@@ -25,7 +25,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/vg18gupta/Ftx">
-    <img src="client/src/Static/logo.png" alt="Logo" width="80" height="120">
+    <img src="client/src/Static/logo.png" alt="Logo" width="150" height="120">
   </a>
 
 <h3 align="center">Rewardo - The Reward app</h3>
