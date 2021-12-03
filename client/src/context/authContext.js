@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
     return Cookies.get(name);
   };
 
-  const userInfo = JSON.parse(getCookie('user'));
+  const userInfo = JSON.parse(getCookie('user') || null);
 
   const [authState, setAuthState] = useState(userInfo || { isLoggedIn: false });
 
