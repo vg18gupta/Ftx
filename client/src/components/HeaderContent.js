@@ -16,7 +16,7 @@ export default function Header() {
       </a>
       {!authContext.isAuthenticated() ? (
         <a href="/signup">
-          <Button type="primary">Sign Up</Button>
+          <Button style={{backgroundColor: "#51CC71", borderRadius: "10px"}} type="primary">Sign Up</Button>
         </a>
       ) : (
         <Avatar style={{ backgroundColor: '#00ff80' }} icon={<UserOutlined />} />

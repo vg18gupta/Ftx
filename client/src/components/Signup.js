@@ -5,7 +5,7 @@ import './Signup.css';
 
 export default function SignUp() {
     const history = useNavigate();
-    const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business"})
+    const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business", phonemumber: ""})
     const [name, setName] = useState('Name');
     const [errorMessage, setErrorMessage] = useState('');
     function handleEmailChange(e) {
@@ -19,6 +19,45 @@ export default function SignUp() {
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         let expires = "expires="+ d.toUTCString();
         document.cookie = "user" + "=" + JSON.stringify(cvalue) + ";" + expires + ";path=/";
+    }
+    function registerUser() {
+        const data = {
+                "name": signUp.name,
+                "email": signUp.email,
+                "type": signUp.type,
+                "phone": signUp.phonemumber
+            }
+        fetch('http://ee2c-122-163-249-4.ngrok.io/api/register',
+            {
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: data
+            })
+            .then(res => {
+                console.log(res,"sucess")
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }    
+    function getId() {
+        fetch(`http://ee2c-122-163-249-4.ngrok.io/api/id?email=${signUp.email}&type=${signUp.type}`,
+            {
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method: "GET",
+            })
+            .then(res => {
+                console.log(res,"sucess")
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     async function handleSubmitClick() {
         try{
@@ -36,12 +75,17 @@ export default function SignUp() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             };
-            await fetch("/api/add_user", requestOptions)
-            if(signUp.type === 'Customer') {
-                history('/customer/dashboard');
-            }else {
-                history('/business/dashboard');
-            }
+            const promise=[];
+            promise.push(registerUser());
+            promise.push(getId())
+            promise.all(promise)
+            .then(()=>{
+                if(signUp.type === 'Customer') {
+                    history('/customer/dashboard');
+                } else {
+                    history('/business/dashboard');
+                }
+            })
             
         }
         catch(error){
@@ -63,13 +107,16 @@ export default function SignUp() {
     function handleBackClick() {
         history(-1)
     }
+    function handlePhonenumberChange(e) {
+        signUpSet({...signUp, phonemumber: e.target.value})
+    }
     return (
         <div className="signup-parent-container">
             <div className="signup-parent">
                 <div className="backIcon" onClick={handleBackClick}>
                     <img height="40px" width="40px" src="https://static.thenounproject.com/png/344330-200.png" />
                 </div>
-            <div id="card">
+            <div id="signup-card">
                 <div id="card-content">
                 <div id="card-title">
                     <h2>SIGN UP</h2>
@@ -90,6 +137,10 @@ export default function SignUp() {
                     </label>
                     <input id="user-password" class="form-content" type="password" name="password" required onChange={handlePasswordChange}/>
                     <div class="form-border"></div>
+                    <label className="user-phonemumber" for="user-phonemumber">&nbsp;Phonemumber
+                    </label>
+                    <input id="user-phonemumber" class="form-content" type="mumber" name="phonemumber" required onChange={handlePhonenumberChange}/>
+                    <div class="form-border"></div>
                     {/* <a id="forgot-pass-parent" href="#">
                         <legend id="forgot-pass">Forgot password?</legend>
                     </a> */}
@@ -97,7 +148,7 @@ export default function SignUp() {
                         <input className="radio-first" type="radio" value="Business" name="gender" checked="checked" onChange={handleTypeChange}/> Bussiness
                         <input className="radio-second" type="radio" value="Customer" name="gender"  onChange={handleTypeChange}/> Customer
                     </div>
-                    <div id="submit-btn"  onClick={handleSubmitClick}>Submit</div>
+                    <div id="signup-submit-btn"  onClick={handleSubmitClick}>Submit</div>
                 </form>
                 </div>
             </div>

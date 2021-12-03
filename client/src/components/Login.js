@@ -18,15 +18,32 @@ export default function Login() {
   function handlePasswordChange(e) {
     setLoginData({ ...loginData, password: e.target.value });
   }
+      function getId() {
+        fetch(`http://ee2c-122-163-249-4.ngrok.io/api/id?email=${loginData.email}&type=${type}`,
+            {
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method: "GET",
+            })
+            .then(res => {
+                console.log(res,"sucess")
+              if (type === 'customer') {
+                history('/customer/dashboard');
+              } else {
+                history('/business/dashboard');
+              }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
   async function handleSubmitClick() {
     try {
       await firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password);
       authContext.setAuthInfo(loginData.email, { isLoggedIn: true, type: type }, 1);
-      if (type === 'customer') {
-        history('/customer/dashboard');
-      } else {
-        history('/business/dashboard');
-      }
+      getId();
     } catch (error) {
       return setErrorMessage(error.message);
     }
