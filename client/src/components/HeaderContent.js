@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Row, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import logo from '../static/logo.png';
+import logo from '../Static/logo.png';
 import './Header.css';
 
 export default function Header() {

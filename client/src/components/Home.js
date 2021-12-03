@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cover from '../static/cover.png';
+import Cover from '../Static/cover.png';
 import './Home.css';
 import LayoutWrapper from './Layout';
 
