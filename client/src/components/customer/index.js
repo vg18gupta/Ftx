@@ -1,15 +1,15 @@
-import { useEffect } from 'react'
-import Header from '../Header'
+import { useEffect } from 'react';
 import { Table, Tag, Space } from 'antd';
 import 'antd/dist/antd.css';
-import './index.css'
+import './index.css';
+import LayoutWrapper from '../Layout';
 
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a>{text}</a>,
+    render: (text) => <a>{text}</a>,
   },
   {
     title: 'Age',
@@ -25,9 +25,9 @@ const columns = [
     title: 'Tags',
     key: 'tags',
     dataIndex: 'tags',
-    render: tags => (
+    render: (tags) => (
       <>
-        {tags.map(tag => {
+        {tags.map((tag) => {
           let color = tag.length > 5 ? 'geekblue' : 'green';
           if (tag === 'loser') {
             color = 'volcano';
@@ -77,42 +77,37 @@ const data = [
   },
 ];
 
-export default function CustomerDashboard({
-    isLogedIn
-}) {
-    function getCookie(name) {
-        var dc = document.cookie;
-        var prefix = name + "=";
-        var begin = dc.indexOf("; " + prefix);
-        if (begin == -1) {
-            begin = dc.indexOf(prefix);
-            if (begin != 0) return null;
-        }
-        else
-        {
-            begin += 2;
-            var end = document.cookie.indexOf(";", begin);
-            if (end == -1) {
-            end = dc.length;
-            }
-        }
-        return decodeURI(dc.substring(begin + prefix.length, end));
-    } 
+export default function CustomerDashboard({ isLogedIn }) {
+  function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + '=';
+    var begin = dc.indexOf('; ' + prefix);
+    if (begin == -1) {
+      begin = dc.indexOf(prefix);
+      if (begin != 0) return null;
+    } else {
+      begin += 2;
+      var end = document.cookie.indexOf(';', begin);
+      if (end == -1) {
+        end = dc.length;
+      }
+    }
+    return decodeURI(dc.substring(begin + prefix.length, end));
+  }
 
-    useEffect(()=>{
-        var myCookie = JSON.parse(getCookie("user"));
-        if(myCookie === null) {
-            window.location.href = '/'
-        }
-    },[])
-    return (
-        <div>
-            <Header/>
-            <div className="customer-dashboard-parent">
-                <div className="customer-parent-children">
-                    <Table columns={columns} dataSource={data} />
-                </div>
-            </div>
+  useEffect(() => {
+    var myCookie = JSON.parse(getCookie('user'));
+    if (myCookie === null) {
+      window.location.href = '/';
+    }
+  }, []);
+  return (
+    <LayoutWrapper>
+      <div className="customer-dashboard-parent">
+        <div className="customer-parent-children">
+          <Table columns={columns} dataSource={data} />
         </div>
-    )
+      </div>
+    </LayoutWrapper>
+  );
 }
