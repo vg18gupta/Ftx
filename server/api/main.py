@@ -1,8 +1,9 @@
 #main.py
 from flask import Flask, make_response, jsonify, request
 from models import ma, db, User, user_schema, users_schema, Transaction, transaction_schema, transactions_schema, Reward, reward_schema, rewards_schema
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 # Google Cloud SQL (change this accordingly)
 PASSWORD ="Razorpay1234"
@@ -25,6 +26,7 @@ with app.app_context():
 @app.route('/api/register', methods =['POST'])
 def register():
   user = request.get_json()
+  print(user)
   user = User(name = user["name"],email = user["email"], type=user["type"], phone=user["phone"])
   db.session.add(user)
   db.session.commit()
@@ -36,7 +38,7 @@ def register():
 
 #fetch business_id for a given email+user type
 #but only email can be used since email is unique in firebase
-@app.route('/api/business_id', methods =['GET'])
+@app.route('/api/id', methods =['GET'])
 def business_id():
   business_id = User.query.filter(User.email == request.args["email"]).first().id
   return jsonify(business_id)
