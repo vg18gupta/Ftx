@@ -5,16 +5,16 @@ from models import ma, db, User, user_schema, users_schema, Transaction, transac
 app = Flask(__name__)
 
 # Google Cloud SQL (change this accordingly)
-PASSWORD ="#"
-PUBLIC_IP_ADDRESS ="#"
-DBNAME ="#"
-PROJECT_ID ="#"
-INSTANCE_NAME ="#"
-CONNECTION_NAME = "#"
+PASSWORD ="Razorpay1234"
+PUBLIC_IP_ADDRESS ="34.131.148.23"
+DBNAME ="rewardo"
+PROJECT_ID ="rewardo-333907"
+INSTANCE_NAME ="rewardo-db"
+CONNECTION_NAME = "rewardo-333907:asia-south2:rewardo-db"
 
 # configuration
-app.config["SECRET_KEY"] = "#"
-app.config["SQLALCHEMY_DATABASE_URI"]= "#"
+app.config["SECRET_KEY"] = "Razorpay1234"
+app.config["SQLALCHEMY_DATABASE_URI"]= "mysql+mysqldb://root:Razorpay1234@34.131.148.23/rewardo?unix_socket=/cloudsql/rewardo-333907:rewardo-db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 
 db.init_app(app)
@@ -26,7 +26,6 @@ with app.app_context():
 def register():
   user = request.get_json()
   user = User(name = user["name"],email = user["email"], type=user["type"], phone=user["phone"])
-  #adding the fields to users table
   db.session.add(user)
   db.session.commit()
   responseObject = {
@@ -35,13 +34,11 @@ def register():
   }
   return make_response(responseObject, 200)
 
-#but only email can be used since email is uniue in firebase
 #fetch business_id for a given email+user type
+#but only email can be used since email is unique in firebase
 @app.route('/api/business_id', methods =['GET'])
 def business_id():
-  business_id = User.query.filter(
-    User.email == request.args["email"] and User.type == request.args["type"]
-    ).first().id
+  business_id = User.query.filter(User.email == request.args["email"]).first().id
   return jsonify(business_id)
 
 
@@ -56,17 +53,46 @@ def customers():
 def add():
   transaction_details = request.get_json()
 
+  calculated_reward = 100
   #add the entry to transaction table
   transaction = Transaction(
     businessId = transaction_details["business_id"],
     customerId = transaction_details["customer_id"], 
-    reward = 100, 
+    reward = calculated_reward, 
     redeem = transaction_details["redeem_amount"],
     transactionAmount = transaction_details["transaction_amount"])
 
-  # update the customer rewards table
   db.session.add(transaction)
   db.session.commit()
+
+  # update the customer rewards table
+
+  #if customer_id+business_id record doesn't exist then insert new record
+  existing_customer = db.session.query(Reward).get({
+    "customerId" : int(transaction_details["customer_id"]),
+    "businessId" : int(transaction_details["business_id"])
+  })
+
+  if(existing_customer is None):
+    print("customer+business record doesn't exist")
+    customer = Reward(
+      customerId = transaction_details["customer_id"],
+      businessId = transaction_details["business_id"],
+      current_reward = calculated_reward, 
+      total_reward_earned = calculated_reward, 
+      total_transactions = 1
+    )
+    db.session.add(customer)
+    db.session.commit()
+
+  #else update current_reward and total_earned_rewards
+  else:
+    print("update rewards table")
+    existing_customer.current_reward = existing_customer.current_reward + calculated_reward - int(transaction_details["redeem_amount"])
+    existing_customer.total_reward_earned = int(existing_customer.total_reward_earned) +  calculated_reward 
+    existing_customer.total_transactions += 1
+    db.session.commit()
+
   responseObject = {
       'status' : 'success',
       'message': 'Successfully added transaction.'
@@ -74,10 +100,22 @@ def add():
   return make_response(responseObject, 200)
 
 #fetch list of customers for a given business_id
-@app.route('/api/users', methods =['GET'])
+@app.route('/api/user_table', methods =['GET'])
 def users():
   users = User.query.all()
   return jsonify(users_schema.dump(users)) 
+
+#fetch list of customers for a given business_id
+@app.route('/api/reward_table', methods =['GET'])
+def rewards():
+  rewards = Reward.query.all()
+  return jsonify(rewards_schema.dump(rewards)) 
+
+#fetch list of customers for a given business_id
+@app.route('/api/transaction_table', methods =['GET'])
+def transactions():
+  transactions = Transaction.query.all()
+  return jsonify(transactions_schema.dump(transactions)) 
 
 if __name__ == '__main__':
   app.run(debug=True)
