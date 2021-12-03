@@ -1,24 +1,20 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import firebase from "firebase/compat";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/authContext';
 import './Signup.css';
 
 export default function SignUp() {
     const history = useNavigate();
     const [signUp, signUpSet] = useState({name: "", password: "", email: "", type: "Business", phonenumber: ""})
     const [name, setName] = useState('Name');
+    const authContext = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState('');
     function handleEmailChange(e) {
         signUpSet({...signUp, email: e.target.value})
     }
     function handlePasswordChange(e) {
         signUpSet({...signUp, password: e.target.value})
-    }
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = "user" + "=" + JSON.stringify(cvalue) + ";" + expires + ";path=/";
     }
     function registerUser() {
         const data = {
@@ -35,6 +31,11 @@ export default function SignUp() {
             })
             .then(res => {
                 console.log(res,"sucess")
+                if(signUp.type === 'Customer') {
+                    history('/customer/dashboard');
+                } else {
+                    history('/business/dashboard');
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -66,25 +67,18 @@ export default function SignUp() {
                 password: signUp.password,
                 userType: signUp.type
             }
-            setCookie(signUp.email, {isLogedIn: true, type: signUp.type}, 1)
+            authContext.setAuthInfo(signUp.email, { isLoggedIn: true, type: signUp.type }, 1);
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             };
             await fetch("/api/add_user", requestOptions)
-            const promise=[];
-            promise.push(registerUser());
-            //promise.push(getId())
-            promise.all(promise)
-            .then(()=>{
-                if(signUp.type === 'Customer') {
-                    history('/customer/dashboard');
-                } else {
-                    history('/business/dashboard');
-                }
-            })
-            
+            // const promise=[];
+            // promise.push(registerUser());
+            // //promise.push(getId())
+            // promise.all(promise)
+            await registerUser() 
         }
         catch(error){
             return setErrorMessage(error.message);

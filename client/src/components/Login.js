@@ -19,7 +19,7 @@ export default function Login() {
     setLoginData({ ...loginData, password: e.target.value });
   }
       function getId() {
-        fetch(`/api/id?email=${loginData.email}&type=${type}`,
+        fetch(`/api/id?email=${loginData.email}`,
             {
                 headers: {
                 'Accept': 'application/json',
@@ -28,7 +28,10 @@ export default function Login() {
                 method: "GET",
             })
             .then(res => {
-                console.log(res,"sucess")
+              res.json();
+            })
+            .then(data=>{
+              console.log(data,"idddd")
               if (type === 'customer') {
                 history('/customer/dashboard');
               } else {
