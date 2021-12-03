@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
 
   const userInfo = JSON.parse(getCookie('user') || null);
 
-  const [authState, setAuthState] = useState(userInfo || { isLoggedIn: false });
+  const [authState, setAuthState] = useState(userInfo || { isLoggedIn: false, id: null });
 
   const setAuthInfo = (cname, cvalue, exdays) => {
     console.log('setting auth info', cvalue);
@@ -37,9 +37,6 @@ const AuthProvider = ({ children }) => {
     history('/login');
   };
 
-  const updateAuthState = (id) => {
-    setAuthState({...authState, id: id});
-  }
   return (
     <Provider
       value={{
@@ -48,7 +45,6 @@ const AuthProvider = ({ children }) => {
         isAuthenticated,
         logout,
         isBusiness,
-        updateAuthState,
       }}
     >
       {children}
