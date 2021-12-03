@@ -56,12 +56,11 @@ class Reward(db.Model):
     last_purchased_date = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now(), nullable = False)
     total_transactions = db.Column(db.Integer, nullable = False)
 
-    def __init__(self, customerId, businessId, current_reward, total_reward_earned, last_purchased_date, total_transactions):
+    def __init__(self, customerId, businessId, current_reward, total_reward_earned, total_transactions):
         self.customerId = customerId 
         self.businessId = businessId 
         self.current_reward = current_reward 
-        self.total_reward_earned = total_reward_earned  
-        self.last_purchased_date = last_purchased_date  
+        self.total_reward_earned = total_reward_earned   
         self.total_transactions = total_transactions  
 
 
