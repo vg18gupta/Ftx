@@ -17,12 +17,14 @@ const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState(userInfo || { isLoggedIn: false });
 
   const setAuthInfo = (cname, cvalue, exdays) => {
+    console.log('setting auth info', cvalue);
     Cookies.set(cname, JSON.stringify(cvalue), { expires: exdays, path: '/' });
     setAuthState(cvalue);
   };
 
   const isAuthenticated = () => {
-    if (!authState.isLoggedIn) return false;
+    console.log('is authenticated', authState.isLoggedIn);
+    return authState.isLoggedIn;
   };
 
   const isBusiness = () => {

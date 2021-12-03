@@ -1,0 +1,9 @@
+.customer-dashboard-parent{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.customer-parent-children {
+  width: 1170px;
+  margin-top: 60px;
+}
