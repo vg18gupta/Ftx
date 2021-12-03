@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cover from '../Static/cover.png';
+import Cover from '../static/cover.png';
 import './Home.css';
 import LayoutWrapper from './Layout';
 import { AuthContext } from '../context/authContext';
