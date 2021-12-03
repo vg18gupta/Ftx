@@ -25,7 +25,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/vg18gupta/Ftx">
-    <img src="client/src/Static/logo.png" alt="Logo" width="80" height="80">
+    <img src="client/src/Static/logo.png" alt="Logo" width="80" height="120">
   </a>
 
 <h3 align="center">Rewardo - The Reward app</h3>
@@ -161,7 +161,7 @@ See the [open issues](https://github.com/vg18gupta/issues) for a full list of pr
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/duplicitops) - prateek98saikia@gmail.com
+Your Name - [@duplicitops](https://twitter.com/duplicitops) - prateek98saikia@gmail.com
 
 Project Link: [https://github.com/vg18gupta/Ftx](vg18gupta)
 
