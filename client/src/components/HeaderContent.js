@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Row, Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
 import logo from '../Static/logo.png';
-// import LogoutModal from './LogoutModal';
 import { AuthContext } from '../context/authContext';
 import './Header.css';
 import { PlusOutlined } from '@ant-design/icons';
@@ -18,18 +17,6 @@ export default function Header({ setIsTxnModalVisible }) {
     </Menu>
   );
 
-  const [dropList, setDropList] = useState(false);
-  const [showLogout, setShowLogout] = useState(false);
-  const setDrop = () => {
-    <Dropdown overlay={menu}>
-      <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-        Hover me <DownOutlined />
-      </a>
-    </Dropdown>;
-  };
-  function handleModalClose() {
-    setShowLogout(false);
-  }
   return (
     <Row justify="space-between" align="middle">
       <a href="/">
