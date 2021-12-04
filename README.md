@@ -8,7 +8,6 @@
 -->
 
 
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -17,10 +16,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-
-
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -47,7 +42,6 @@
 </div>
 
 
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -72,7 +66,6 @@
   </ol>
 </details>
 
-
 <br>
 
 <!-- ABOUT THE PROJECT -->
@@ -83,7 +76,6 @@
 This project provides customers a compiled view of rewards from every business which uses our app. This mitigates the problem of having multiple reward cards from each and every major business and gives a chance for small businesses to compete with the major players. Offers can be also created based on Special occasions, Festivals or any way the business owner wants to.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ### Built With
 
@@ -114,14 +106,8 @@ This project provides customers a compiled view of rewards from every business w
    npm install
    npm start
    ```
-4. Get a free API Key at [https://example.com](https://example.com)
-5. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -129,8 +115,6 @@ This project provides customers a compiled view of rewards from every business w
 This app can be used to incentivize customers to shop more to further accumualate their reward points, which this will lead to increase in revenue for any business using our app. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- ROADMAP -->
 ## Roadmap
