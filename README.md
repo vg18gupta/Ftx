@@ -112,9 +112,9 @@ This is what you need to use for the software and how to install them.
   npm install npm@latest -g
   ```
 * flask
-```sh
-pip3 install flask
-```
+  ```sh
+  pip3 install flask
+  ```
 
 
 ### Installation
@@ -166,7 +166,7 @@ See the [open issues](https://github.com/vg18gupta/issues) for a full list of pr
 <!-- CONTACT -->
 ## Contact
 
-Prateek Saikia - [@duplicitops](https://twitter.com/duplicitops) - prateek98saikia@gmail.com
+Prateek Saikia - [@duplicitops](https://twitter.com/duplicitops) - prateek25saikia@gmail.com
 
 Project Link: [https://github.com/vg18gupta/Ftx](vg18gupta)
 
