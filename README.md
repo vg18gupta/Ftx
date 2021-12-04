@@ -1,21 +1,5 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 <!-- PROJECT LOGO -->
 <br />
@@ -107,10 +91,13 @@ This project provides customers a compiled view of rewards from every business w
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-This app can be used to incentivize customers to shop more to further accumualate their reward points, which this will lead to increase in revenue for any business using our app. 
+This is the perfect app for small businesses to attract and retain customers with discounts, vouchers, cashbacks etc. We offer analytics calculated using purchase data. For example, you can use our API's to see which customers have the highest amount of transactions with your business or check how many purchases were done per day or the last month.  
 <br><br>
+<p align="center"><strong>Customer Page »</strong></p>
 <img width="900" alt="image" src="https://user-images.githubusercontent.com/34713296/144714075-9f917c24-08f4-489d-9a69-d27d9e2a1180.png">
+<br><p align="center"><strong>Business Page »</strong></p>
+<img width="920" alt="business analytics" src="https://user-images.githubusercontent.com/34713296/144717009-a1c9dfc5-c165-413f-ad8f-f6eed9296130.png">
+<br>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -154,18 +141,4 @@ Project Link: [https://ftx-rewardo-client.herokuapp.com/](vg18gupta)
 
 
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+
