@@ -1,15 +1,15 @@
 import { Button, notification } from 'antd';
 
-export const openNotification = (description) => {
+export const openErrorNotification = (description) => {
   notification.error({
-    message: "Error",
+    message: 'Error',
     description: description,
   });
 };
 
-export const openSucessNotification = (description) => {
+export const openSuccessNotification = (description) => {
   notification.open({
-    message: "Sucess",
+    message: 'Success',
     description: description,
   });
 };

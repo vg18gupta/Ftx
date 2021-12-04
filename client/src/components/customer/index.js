@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Row } from 'antd';
+import { Row, Spin } from 'antd';
 import { AuthContext } from '../../context/authContext';
 import 'antd/dist/antd.css';
 import LayoutWrapper from '../Layout';
@@ -10,7 +10,9 @@ export default function CustomerDashboard() {
   const authContext = useContext(AuthContext);
   const id = authContext?.authState?.id;
   const [rewardData, setRewardData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   function getReward() {
+    setIsLoading(true);
     fetch(`/api/customer_rewards?customer_id=${id}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -25,11 +27,19 @@ export default function CustomerDashboard() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }
   useEffect(() => {
     getReward();
   }, []);
+  if (isLoading) {
+    return (
+      <Row style={{ paddingTop: '200px' }} justify="center">
+        <Spin />
+      </Row>
+    );
+  }
   return (
     <LayoutWrapper>
       <div className="customer-dashboard-parent">

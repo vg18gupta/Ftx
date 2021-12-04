@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import firebase from 'firebase/compat';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
-import { openNotification } from './Notification';
+import { openErrorNotification } from './Notification';
 import './Signup.css';
 
 export default function SignUp() {
@@ -88,7 +88,7 @@ export default function SignUp() {
         history('/business/dashboard');
       }
     } catch (error) {
-      openNotification(error.message);
+      openErrorNotification(error.message);
     }
   }
   function handleNameChange(e) {

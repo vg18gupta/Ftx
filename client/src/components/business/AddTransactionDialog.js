@@ -5,6 +5,7 @@ const AddTransactionDialog = ({
   onAddTransaction,
   setIsModalVisible,
   customersList,
+  isLoading,
 }) => {
   const [form] = Form.useForm();
   const handleCancel = () => {
@@ -26,6 +27,7 @@ const AddTransactionDialog = ({
       onOk={onSubmit}
       okText="Add"
       onCancel={handleCancel}
+      confirmLoading={isLoading}
     >
       <TransactionForm form={form} customersList={customersList} />
     </Modal>

@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
-import { Table, Input } from 'antd';
+import { Table, Input, message } from 'antd';
 import 'antd/dist/antd.css';
 import { AuthContext } from '../../context/authContext';
 import './index.css';
 import LayoutWrapper from '../Layout';
 import AddTransactionDialog from './AddTransactionDialog';
+import { openErrorNotification, openSuccessNotification } from '../Notification';
 
 // const data = [
 //   {
@@ -82,6 +83,9 @@ export default function BusinessDashboard() {
   const [customerData, setCustomerData] = useState([]);
   const [allcustomerData, setallCustomerData] = useState([]);
   const [allcustomerDataMap, setallCustomerDataMap] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [isTransactionLoading, setIsTransactionLoading] = useState(false);
+
   const authContext = useContext(AuthContext);
   const id = authContext?.authState?.id;
 
@@ -120,7 +124,7 @@ export default function BusinessDashboard() {
   ];
 
   function getcustomerData() {
-    fetch(`/api/customers?business_id=${id}`, {
+    return fetch(`/api/customers?business_id=${id}`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -137,7 +141,7 @@ export default function BusinessDashboard() {
       });
   }
   function getallcustomerData() {
-    fetch(`/api/global_customers?business_id=${id}`, {
+    return fetch(`/api/global_customers?business_id=${id}`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -167,6 +171,7 @@ export default function BusinessDashboard() {
       redeem_amount: value.redeemAmount,
       transaction_amount: value.transactionAmount,
     };
+    setIsTransactionLoading(true);
     fetch('/api/add_transaction', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -174,18 +179,28 @@ export default function BusinessDashboard() {
     })
       .then((res) => {
         // getId();
-        getcustomerData();
-        getallcustomerData();
+        loadData();
+        openSuccessNotification('Transaction added succesfully💸');
         setIsModalVisible(false);
       })
       .catch((err) => {
-        console.log(err);
-      });
+        openErrorNotification('Failed to add transaction, please try again🛠');
+      })
+      .finally(() => setIsTransactionLoading(false));
   }
+  const loadData = async () => {
+    setIsLoading(true);
+    try {
+      await Promise.all[(getcustomerData(), getallcustomerData())];
+    } catch (e) {
+      openErrorNotification('Failed to load data, please try again');
+    }
+    setIsLoading(false);
+  };
   useEffect(() => {
-    getcustomerData();
-    getallcustomerData();
+    loadData();
   }, []);
+
   const onSearch = (val) => {
     console.log(val);
     setSearchText(val);
@@ -206,6 +221,7 @@ export default function BusinessDashboard() {
           setIsModalVisible={setIsModalVisible}
           onAddTransaction={postTransaction}
           customersList={allcustomerData}
+          isLoading={isTransactionLoading}
         />
       )}
 
@@ -219,7 +235,7 @@ export default function BusinessDashboard() {
               onSearch={onSearch}
               style={{ width: 185 }}
             />
-            <Table columns={columns} dataSource={filteredData} />
+            <Table columns={columns} dataSource={filteredData} loading={isLoading} />
           </div>
         </div>
       </LayoutWrapper>
