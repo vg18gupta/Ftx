@@ -26,7 +26,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/vg18gupta/Ftx">
-    <img src="client/src/Static/logo.png" alt="Logo" width="200" height="120">
+    <img src="client/src/Static/logo.png" alt="Logo" width="270" height="80">
   </a>
 
 <h3 align="center">Rewardo - The Reward app</h3>
@@ -85,57 +85,42 @@ This project provides customers a compiled view of rewards from every business w
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 ### Built With
 
 * [React.js](https://reactjs.org/)
-* [JavaScript](https://www.javascript.com/)
-* [Python](https://www.python.org/)
 * [Flask](https://flask.palletsprojects.com/en/2.0.x/)
-* [SQLAlchemy](https://www.sqlalchemy.org/)
+* [Postgresql](https://www.postgresql.org/)
 * [Ant Design](https://ant.design/)
 * [Firebase](https://firebase.google.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
-## Getting Started
 
-To get started, first clone the app to your local machine. We use Cloud base DB so you can run our app from any machine from anywhere. Just follow the steps!
-
-### Prerequisites
-
-This is what you need to use for the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-* flask
-  ```sh
-  pip3 install flask
-  ```
-
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+### Run the webapp locally
+1. Clone the repo
    ```sh
    git clone https://github.com/github_username/repo_name.git
    ```
-3. Install NPM packages
+2. Start the Flask server - navigate into repo directory and run - 
+   ```sh
+   python3 -m venv env
+   source env/bin/activate
+   pip install -r requirements.txt
+   flask run
+   ```
+3. Start the React server - navigate into client directory and run - 
    ```sh
    npm install
+   npm start
    ```
-4. Enter your API in `config.js`
+4. Get a free API Key at [https://example.com](https://example.com)
+5. Enter your API in `config.js`
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
