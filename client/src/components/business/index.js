@@ -6,7 +6,6 @@ import './index.css';
 import LayoutWrapper from '../Layout';
 import AddTransactionDialog from './AddTransactionDialog';
 
-
 // const data = [
 //   {
 //     key: '1',
@@ -92,8 +91,8 @@ export default function BusinessDashboard() {
       dataIndex: 'customerId',
       key: 'customerId',
       render: (val) => {
-        return allcustomerDataMap[val]?.phone
-      }
+        return allcustomerDataMap[val]?.phone;
+      },
     },
     {
       title: 'Current Reward Points',
@@ -115,7 +114,8 @@ export default function BusinessDashboard() {
       render: (val) => {
         return new Date(val).toLocaleDateString();
       },
-      sorter: (a, b) => a.last_purchased_date.toUTCString() - b.last_purchased_date.toUTCString(),
+      sorter: (a, b) =>
+        new Date(a.last_purchased_date).valueOf() - new Date(b.last_purchased_date).valueOf(),
     },
   ];
 
@@ -147,7 +147,12 @@ export default function BusinessDashboard() {
         return res.json();
       })
       .then((data) => {
-        setallCustomerDataMap(data.reduce((acc,item)=>{acc[item.id]=item;return acc},{}));
+        setallCustomerDataMap(
+          data.reduce((acc, item) => {
+            acc[item.id] = item;
+            return acc;
+          }, {}),
+        );
         setallCustomerData(data);
       })
       .catch((err) => {
@@ -156,12 +161,11 @@ export default function BusinessDashboard() {
   }
   //add transaction API
   function postTransaction(value) {
-    console.log(value,"value")
     const data = {
-      "business_id": id,
-      "customer_id": value.id,
-      "redeem_amount": value.redeemAmount,
-      "transaction_amount": value.transactionAmount,
+      business_id: id,
+      customer_id: value.id,
+      redeem_amount: value.redeemAmount,
+      transaction_amount: value.transactionAmount,
     };
     fetch('/api/add_transaction', {
       method: 'POST',
@@ -188,7 +192,9 @@ export default function BusinessDashboard() {
   };
   const filteredData = customerData.filter((item) => {
     if (searchText && searchText.trim()) {
-      return allcustomerDataMap[item.customerId]?.phone.toLowerCase().includes(searchText.trim().toLowerCase());
+      return allcustomerDataMap[item.customerId]?.phone
+        .toLowerCase()
+        .includes(searchText.trim().toLowerCase());
     }
     return true;
   });
