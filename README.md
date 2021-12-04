@@ -21,6 +21,7 @@
 
 
 
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -34,14 +35,14 @@
     This app was designed and coded during the FTX'21 Hackathon. Rewardo enables business owners to reward customers with reward points which any customer can avail 
     for discounts.
     <br />
-    <a href="https://github.com/vg18gupta/Ftx"><strong>Explore the docs »</strong></a>
+    <a href="https://ftx-rewardo-client.herokuapp.com/"><strong>Explore the App »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vg18gupta/Ftx">View Demo</a>
+    <a href="https://github.com/vg18gupta/Ftx">View Code</a>
     ·
     <a href="https://github.com/vg18gupta/Ftx/issues">Report Bug</a>
     ·
-    <a href="https://github.com/vg18gupta/Ftx/issues">Request Feature</a>
+    <a href="https://github.com/vg18gupta/Ftx/pulls">Request Pulls</a>
   </p>
 </div>
 
@@ -65,7 +66,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributors">Contributing</a></li>
+    <li><a href="#roadmap">Road Map</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -77,7 +78,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img width="933" alt="image" src="https://user-images.githubusercontent.com/34713296/144712202-04c8bd44-6ac4-4465-bdce-f454adadb44d.png">
 
 This project provides customers a compiled view of rewards from every business which uses our app. This mitigates the problem of having multiple reward cards from each and every major business and gives a chance for small businesses to compete with the major players. Offers can be also created based on Special occasions, Festivals or any way the business owner wants to.
 
