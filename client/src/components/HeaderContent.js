@@ -36,7 +36,7 @@ export default function Header({ setIsTxnModalVisible }) {
 
         {!authContext.isAuthenticated() ? (
           <a href="/signup">
-            <Button style={{ backgroundColor: '#51CC71', borderRadius: '5px' }} type="primary">
+            <Button style={{ backgroundColor: '#51CC71', borderRadius: '5px', borderColor:'#51CC71' }} type="primary">
               Sign Up
             </Button>
           </a>
