@@ -1,6 +1,7 @@
 import './App.css';
 import { useContext } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { Empty } from 'antd' 
 import Home from './components/Home';
 import SignUp from './components/Signup';
 import Login from './components/Login';
@@ -21,7 +22,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/customer/login" element={<Login />} />
@@ -42,6 +43,7 @@ function App() {
               </AuthenticatedRoute>
             }
           />
+          <Route path="*" element={<Empty style={{padding: "200px"}} description="Page Not Found"/>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
