@@ -167,6 +167,13 @@ def transactions():
   transactions = Transaction.query.all()
   return jsonify(transactions_schema.dump(transactions)) 
 
+#fetch top customers by un-redeemed points
+@app.route('/api/top_customers', methods =['GET'])
+def top_customers():
+  top_customers = db.session.query(Reward).filter(Reward.businessId==request.args['business_id']).order_by(Reward.current_reward.desc()).limit(10).all()
+  return jsonify(rewards_schema.dump(top_customers))
+
+
 # @app.route('/*')
 # def serve():
 #     print("in root route")
