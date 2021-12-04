@@ -1,0 +1,40 @@
+.card {
+  background: url('../Static/medal.png'), radial-gradient(#60efbc, #58d5c9);
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 20px;
+  padding: 20px;
+  width: 350px;
+  min-height: 200px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
+  line-height: normal;
+}
+
+.card:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
+}
+
+.card__title {
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card__subtitle {
+  color: whitesmoke;
+  font-size: 1.2rem;
+}
+
+.card__description {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #fff082;
+  font-size: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
