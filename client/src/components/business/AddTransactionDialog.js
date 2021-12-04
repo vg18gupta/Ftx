@@ -13,7 +13,8 @@ const AddTransactionDialog = ({
   };
   const onSubmit = () => {
     form.validateFields().then((values) => {
-      onAddTransaction(values)
+      console.log(values);
+      onAddTransaction(values);
       form.resetFields();
       setIsModalVisible(false);
     });

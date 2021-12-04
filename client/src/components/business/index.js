@@ -103,14 +103,14 @@ const customers = [
     name: 'cricket@gmail.com',
     phone: '635469831245',
     type: 'Customer',
-    reward: 100,
+    reward: 300,
   },
 ];
 export default function BusinessDashboard() {
   const [searchText, setSearchText] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [customerData, setCustomerData] = useState([]);
-  const [allcustomerData, setallCustomerData] = useState([])
+  const [allcustomerData, setallCustomerData] = useState([]);
   const authContext = useContext(AuthContext);
   const id = authContext?.authState?.id;
   function getcustomerData() {
@@ -130,48 +130,49 @@ export default function BusinessDashboard() {
         console.log(err);
       });
   }
-    function getallcustomerData() {
-    fetch(`/api/global_customers?business_id=${id}`,{
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "GET",
+  function getallcustomerData() {
+    fetch(`/api/global_customers?business_id=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    })
+      .then((res) => {
+        return res.json();
       })
-      .then(res => {return res.json();})
-      .then(data => {
-        setallCustomerData(data)
+      .then((data) => {
+        setallCustomerData(data);
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  //add transaction API 
+  //add transaction API
 
   function postTransaction(value) {
     const data = {
-      "business_id": id,
-      "customer_id": value.customerId,
-      "redeem_amount": value.reedemAmount,
-      "transaction_amount": value.transactionAmount
-    }
-    fetch('/api/register',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(res => {
+      business_id: id,
+      customer_id: value.customerId,
+      redeem_amount: value.reedemAmount,
+      transaction_amount: value.transactionAmount,
+    };
+    fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
         // getId();
-        setIsModalVisible(false)
+        setIsModalVisible(false);
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  useEffect(()=>{
+  useEffect(() => {
     getcustomerData();
     getallcustomerData();
-  },[])
+  }, []);
   const onSearch = (val) => {
     console.log(val);
     setSearchText(val);

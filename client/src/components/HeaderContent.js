@@ -4,7 +4,6 @@ import { Button, Row, Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
 import logo from '../Static/logo.png';
 import { AuthContext } from '../context/authContext';
-import LogoutModal from './LogoutModal';
 import './Header.css';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -43,7 +42,7 @@ export default function Header({ setIsTxnModalVisible }) {
     </Dropdown>;
   };
   function handleModalClose() {
-    setShowLogout(false)
+    setShowLogout(false);
   }
   return (
     <Row justify="space-between" align="middle">
@@ -51,18 +50,17 @@ export default function Header({ setIsTxnModalVisible }) {
         <img src={logo} alt="logo" height="40"></img>
       </a>
       <div>
-        {
-          type === 'business' && (<Button
-                    type="link"
-                    icon={<PlusOutlined />}
-                    style={{ color: '#51CC71', marginRight: '30px' }}
-                    onClick={() => setIsTxnModalVisible(true)}
-                  >
-                    Add New Transaction
-                  </Button>
-          )
-        }
-        
+        {type === 'business' && (
+          <Button
+            type="link"
+            icon={<PlusOutlined />}
+            style={{ color: '#51CC71', marginRight: '30px' }}
+            onClick={() => setIsTxnModalVisible(true)}
+          >
+            Add New Transaction
+          </Button>
+        )}
+
         {!authContext.isAuthenticated() ? (
           <a href="/signup">
             <Button style={{ backgroundColor: '#51CC71', borderRadius: '5px' }} type="primary">
@@ -73,7 +71,9 @@ export default function Header({ setIsTxnModalVisible }) {
           <Avatar
             style={{ backgroundColor: '#00ff80' }}
             icon={<UserOutlined />}
-            onClick={() => {setShowLogout(true)}}
+            onClick={() => {
+              setShowLogout(true);
+            }}
           />
         )}
         {/* {
