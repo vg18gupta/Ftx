@@ -91,7 +91,7 @@ This project provides customers a compiled view of rewards from every business w
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-This is the perfect app for small businesses to attract and retain customers with discounts, vouchers, cashbacks etc. We offer analytics calculated using purchase data. For example, you can use our API's to see which customers have the highest amount of transactions with your business or check how many purchases were done per day or the lastt month.  
+This is the perfect app for small businesses to attract and retain customers with discounts, vouchers, cashbacks etc. We offer analytics calculated using purchase data. For example, you can use our API's to see which customers have the highest amount of transactions with your business or check how many purchases were done per day or the last month.  
 <br><br>
 <p align="center"><strong>Customer Page »</strong></p>
 <img width="900" alt="image" src="https://user-images.githubusercontent.com/34713296/144714075-9f917c24-08f4-489d-9a69-d27d9e2a1180.png">
