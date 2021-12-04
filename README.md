@@ -8,7 +8,6 @@
 -->
 
 
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -18,14 +17,11 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/vg18gupta/Ftx">
-    <img src="client/src/Static/logo.png" alt="Logo" width="200" height="120">
+    <img src="client/src/Static/logo.png" alt="Logo" width="270" height="80">
   </a>
 
 <h3 align="center">Rewardo - The Reward app</h3>
@@ -34,17 +30,16 @@
     This app was designed and coded during the FTX'21 Hackathon. Rewardo enables business owners to reward customers with reward points which any customer can avail 
     for discounts.
     <br />
-    <a href="https://github.com/vg18gupta/Ftx"><strong>Explore the docs »</strong></a>
+    <a href="https://ftx-rewardo-client.herokuapp.com/"><strong>Explore the App »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vg18gupta/Ftx">View Demo</a>
+    <a href="https://github.com/vg18gupta/Ftx">View Code</a>
     ·
     <a href="https://github.com/vg18gupta/Ftx/issues">Report Bug</a>
     ·
-    <a href="https://github.com/vg18gupta/Ftx/issues">Request Feature</a>
+    <a href="https://github.com/vg18gupta/Ftx/pulls">Request Pulls</a>
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -52,99 +47,72 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      About The Project
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li>Built With</li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      Getting Started
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributors">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li>Usage</li>
+    <li>Road Map</li>
+    <li>Contact</li>
+    <li>Acknowledgments</li>
   </ol>
 </details>
-
 
 <br>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img width="933" alt="image" src="https://user-images.githubusercontent.com/34713296/144712202-04c8bd44-6ac4-4465-bdce-f454adadb44d.png">
 
 This project provides customers a compiled view of rewards from every business which uses our app. This mitigates the problem of having multiple reward cards from each and every major business and gives a chance for small businesses to compete with the major players. Offers can be also created based on Special occasions, Festivals or any way the business owner wants to.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
 * [React.js](https://reactjs.org/)
-* [JavaScript](https://www.javascript.com/)
-* [Python](https://www.python.org/)
 * [Flask](https://flask.palletsprojects.com/en/2.0.x/)
-* [SQLAlchemy](https://www.sqlalchemy.org/)
+* [Postgresql](https://www.postgresql.org/)
 * [Ant Design](https://ant.design/)
 * [Firebase](https://firebase.google.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
-## Getting Started
 
-To get started, first clone the app to your local machine. We use Cloud base DB so you can run our app from any machine from anywhere. Just follow the steps!
-
-### Prerequisites
-
-This is what you need to use for the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-* flask
-```sh
-pip3 install flask
-```
-
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+### Run the webapp locally
+1. Clone the repo
    ```sh
    git clone https://github.com/github_username/repo_name.git
    ```
-3. Install NPM packages
+2. Start the Flask server - navigate into repo directory and run - 
+   ```sh
+   python3 -m venv env
+   source env/bin/activate
+   pip install -r requirements.txt
+   flask run
+   ```
+3. Start the React server - navigate into client directory and run - 
    ```sh
    npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   npm start
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
 This app can be used to incentivize customers to shop more to further accumualate their reward points, which this will lead to increase in revenue for any business using our app. 
+<br><br>
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/34713296/144714075-9f917c24-08f4-489d-9a69-d27d9e2a1180.png">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -154,7 +122,7 @@ This app can be used to incentivize customers to shop more to further accumualat
 -  Get Funding!
 -  Open it for Public use!
 
-See the [open issues](https://github.com/vg18gupta/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/vg18gupta/Ftx/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -166,9 +134,9 @@ See the [open issues](https://github.com/vg18gupta/issues) for a full list of pr
 <!-- CONTACT -->
 ## Contact
 
-Prateek Saikia - [@duplicitops](https://twitter.com/duplicitops) - prateek98saikia@gmail.com
+Prateek Saikia - [@duplicitops](https://twitter.com/duplicitops) - prateek25saikia@gmail.com
 
-Project Link: [https://github.com/vg18gupta/Ftx](vg18gupta)
+Project Link: [https://ftx-rewardo-client.herokuapp.com/](vg18gupta)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

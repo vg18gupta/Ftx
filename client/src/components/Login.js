@@ -2,6 +2,7 @@ import firebase from 'firebase/compat';
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/authContext';
+import { openErrorNotification } from './Notification';
 import './Login.css';
 
 export default function Login() {
@@ -48,7 +49,7 @@ export default function Login() {
         history('/business/dashboard');
       }
     } catch (error) {
-      return setErrorMessage(error.message);
+      openErrorNotification(error.message);
     }
   }
   function handleBackClick() {
