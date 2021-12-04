@@ -11,7 +11,7 @@ export default function SignUp() {
     name: '',
     password: '',
     email: '',
-    type: 'Business',
+    type: 'Customer',
     phonenumber: '',
   });
   const [name, setName] = useState('Name');
@@ -127,7 +127,7 @@ export default function SignUp() {
             </div>
             <form method="post" class="form">
               <label className="user-mail" for="user-email">
-                {`${name}`}
+                {signUp.type === 'Business' ? 'Shop Name' : 'Name'}
               </label>
               <input
                 id="user-email"
@@ -185,7 +185,7 @@ export default function SignUp() {
                   type="radio"
                   value="Business"
                   name="gender"
-                  checked="checked"
+                  checked={signUp.type === 'Business'}
                   onChange={handleTypeChange}
                 />{' '}
                 Business
@@ -194,6 +194,8 @@ export default function SignUp() {
                   type="radio"
                   value="Customer"
                   name="gender"
+                  checked={signUp.type === 'Customer'}
+                  defaultChecked={true}
                   onChange={handleTypeChange}
                 />{' '}
                 Customer
