@@ -111,6 +111,9 @@ This project provides customers a compiled view of rewards from every business w
 This app can be used to incentivize customers to shop more to further accumualate their reward points, which this will lead to increase in revenue for any business using our app. 
 <br><br>
 <img width="900" alt="image" src="https://user-images.githubusercontent.com/34713296/144714075-9f917c24-08f4-489d-9a69-d27d9e2a1180.png">
+<br><p align="center"><strong>Customer Page »</strong></p>
+<img width="920" alt="business analytics" src="https://user-images.githubusercontent.com/34713296/144717009-a1c9dfc5-c165-413f-ad8f-f6eed9296130.png">
+<br><p align="center"><strong>Business Page »</strong></p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
