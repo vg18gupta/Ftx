@@ -18,7 +18,7 @@ export default function SignUp() {
         signUpSet({...signUp, password: e.target.value})
     }    
     function getId() {
-        fetch(`/api/id?email=${signUp.email}&type=${signUp.type}`,
+        return fetch(`/api/id?email=${signUp.email}`,
             {
                 headers: {
                 'Accept': 'application/json',
@@ -30,12 +30,7 @@ export default function SignUp() {
               return res.json();
             })
             .then(id => {
-                authContext.updateAuthState(id);
-                if(signUp.type === 'Customer') {
-                    history('/customer/dashboard');
-                } else {
-                    history('/business/dashboard');
-                }
+              return id;
             })
             .catch(err => {
                 console.log(err)
@@ -48,14 +43,14 @@ export default function SignUp() {
                 "type": signUp.type,
                 "phone": signUp.phonenumber
             }
-        fetch('/api/register',
+        return fetch('/api/register',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
             .then(res => {
-                getId();
+                return res;
             })
             .catch(err => {
                 console.log(err)
@@ -71,18 +66,21 @@ export default function SignUp() {
                 password: signUp.password,
                 userType: signUp.type
             }
-            authContext.setAuthInfo(signUp.email, { isLoggedIn: true, type: signUp.type }, 1);
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             };
             await fetch("/api/add_user", requestOptions)
-            // const promise=[];
-            // promise.push(registerUser());
-            // //promise.push(getId())
-            // promise.all(promise)
             await registerUser() 
+            const id = await getId()
+            authContext.setAuthInfo(signUp.email, { isLoggedIn: true, type: signUp.type, id: id }, 1);
+
+                if(signUp.type === 'Customer') {
+                    history('/customer/dashboard');
+                } else {
+                    history('/business/dashboard');
+                }
         }
         catch(error){
             openNotification(error.message)

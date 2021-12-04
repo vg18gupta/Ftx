@@ -6,20 +6,16 @@ app = Flask(__name__)
 CORS(app)
 
 # Google Cloud SQL (change this accordingly)
-# PASSWORD ="Razorpay1234"
-# PUBLIC_IP_ADDRESS ="34.131.148.23"
-# DBNAME ="rewardo"
-# PROJECT_ID ="rewardo-333907"
-# INSTANCE_NAME ="rewardo-db"
-# CONNECTION_NAME = "rewardo-333907:asia-south2:rewardo-db"
+PASSWORD ="Razorpay1234"
+PUBLIC_IP_ADDRESS ="34.131.148.23"
+DBNAME ="rewardo"
+PROJECT_ID ="rewardo-333907"
+INSTANCE_NAME ="rewardo-db"
+CONNECTION_NAME = "rewardo-333907:asia-south2:rewardo-db"
 
-# # configuration
-# app.config["SECRET_KEY"] = "Razorpay1234"
-# app.config["SQLALCHEMY_DATABASE_URI"]= "mysql+mysqldb://root:Razorpay1234@34.131.148.23/rewardo?unix_socket=/cloudsql/rewardo-333907:rewardo-db"
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
-
-#Postgresql Addition
-app.config["SQLALCHEMY_DATABASE_URI"]= "postgresql+psycopg2://rkpjlmoxpdoipl:89dab57c92c4ed52a0f33cfa0659b72b70eb8e38f34b18b90f8b7777b10a1648@ec2-34-195-69-118.compute-1.amazonaws.com:5432/d2dm8684nrvlll"
+# configuration
+app.config["SECRET_KEY"] = "Razorpay1234"
+app.config["SQLALCHEMY_DATABASE_URI"]= "mysql+mysqldb://root:Razorpay1234@34.131.148.23/rewardo?unix_socket=/cloudsql/rewardo-333907:rewardo-db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 
 db.init_app(app)
@@ -67,6 +63,7 @@ def global_customers():
     })
     customer_dict = {
         "id": customer.id,
+
         "name": customer.name,
         "email": customer.email,
         "phone": customer.phone
@@ -85,6 +82,7 @@ def add():
   transaction_details = request.get_json()
 
   calculated_reward = 100
+  print(transaction_details)
   #add the entry to transaction table
   transaction = Transaction(
     businessId = transaction_details["business_id"],

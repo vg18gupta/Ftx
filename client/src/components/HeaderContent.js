@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Row, Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
 import logo from '../Static/logo.png';
+// import LogoutModal from './LogoutModal';
 import { AuthContext } from '../context/authContext';
 import './Header.css';
 import { PlusOutlined } from '@ant-design/icons';
@@ -13,22 +14,7 @@ export default function Header({ setIsTxnModalVisible }) {
   const type = url.split('/')[3];
   const menu = (
     <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item icon={<DownOutlined />} disabled>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item (disabled)
-        </a>
-      </Menu.Item>
-      <Menu.Item disabled>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          3rd menu item (disabled)
-        </a>
-      </Menu.Item>
-      <Menu.Item danger>a danger item</Menu.Item>
+      <Menu.Item onClick={() => authContext.logout()} danger>Logout</Menu.Item>
     </Menu>
   );
 
@@ -68,17 +54,13 @@ export default function Header({ setIsTxnModalVisible }) {
             </Button>
           </a>
         ) : (
-          <Avatar
-            style={{ backgroundColor: '#00ff80' }}
-            icon={<UserOutlined />}
-            onClick={() => {
-              setShowLogout(true);
-            }}
-          />
+          <Dropdown overlay={menu} placement="bottomLeft">
+            <Avatar
+              style={{ backgroundColor: '#00ff80' }}
+              icon={<UserOutlined />}
+            />
+          </Dropdown>
         )}
-        {/* {
-          showLogout && (<LogoutModal handleModalClose={handleModalClose}/>)
-        } */}
       </div>
     </Row>
   );

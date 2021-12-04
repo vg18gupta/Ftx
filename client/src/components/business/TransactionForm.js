@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Form,
   Input,
@@ -17,12 +17,14 @@ const { Option } = Select;
 const TransactionForm = ({ form, customersList = [] }) => {
   const [formValues, setFormValues] = useState({});
   const [currentReward, setCurrentReward] = useState(0);
+  const [customerId, setCustomerId] = useState(null);
   const [isRedeemed, setIsRedeemed] = useState(false);
   function handleChange(changedValues, allValues) {
     console.log(changedValues);
     if (changedValues.customerId) {
-      const reward = customersList?.find((item) => item.phone === changedValues.customerId)?.reward;
-      setCurrentReward(reward || 0);
+      const currentCustomer = customersList?.find((item) => item.phone === changedValues.customerId);
+      setCurrentReward(currentCustomer.reward || 0);
+      setCustomerId(currentCustomer?.id);
     }
     if (changedValues.transactionAmount !== undefined) {
       setIsRedeemed(false);
@@ -30,6 +32,16 @@ const TransactionForm = ({ form, customersList = [] }) => {
     setFormValues(allValues);
   }
 
+  useEffect(() => {
+      form.setFieldsValue({
+        ...formValues,
+        id: customerId,
+        redeemAmount: 0,
+        redeemPercent: 0,
+        transactionAmount: 0
+      });
+  }, [customerId])
+  
   const onUtiliseRewards = () => {
     const { transactionAmount, redeemPercent } = formValues;
     if (transactionAmount > 1000 && redeemPercent && !isRedeemed) {
@@ -38,7 +50,8 @@ const TransactionForm = ({ form, customersList = [] }) => {
       form.setFieldsValue({
         ...formValues,
         transactionAmount: finalAmount,
-        redeemAmount,
+        redeemAmount: redeemAmount,
+        id: customerId,
       });
       setIsRedeemed(true);
       setCurrentReward(currentReward - redeemAmount);
@@ -99,6 +112,9 @@ const TransactionForm = ({ form, customersList = [] }) => {
         </Button>
       </Row>
       <Form.Item label="Amount redeemed" name="redeemAmount" hidden>
+        <InputNumber style={{ width: '300px' }} />
+      </Form.Item>
+      <Form.Item label="id" name="id" hidden>
         <InputNumber style={{ width: '300px' }} />
       </Form.Item>
     </Form>
