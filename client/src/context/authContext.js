@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     Cookies.remove('user');
     setAuthState({ isLoggedIn: false });
-    history('/login');
+    history('/');
   };
 
   return (

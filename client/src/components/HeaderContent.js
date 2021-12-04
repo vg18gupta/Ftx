@@ -4,11 +4,14 @@ import { Button, Row, Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
 import logo from '../Static/logo.png';
 import { AuthContext } from '../context/authContext';
+import LogoutModal from './LogoutModal';
 import './Header.css';
 import { PlusOutlined } from '@ant-design/icons';
 
 export default function Header({ setIsTxnModalVisible }) {
   const authContext = useContext(AuthContext);
+  const url = window.location.href;
+  const type = url.split('/')[3];
   const menu = (
     <Menu>
       <Menu.Item>
@@ -31,6 +34,7 @@ export default function Header({ setIsTxnModalVisible }) {
   );
 
   const [dropList, setDropList] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const setDrop = () => {
     <Dropdown overlay={menu}>
       <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
@@ -38,21 +42,27 @@ export default function Header({ setIsTxnModalVisible }) {
       </a>
     </Dropdown>;
   };
-
+  function handleModalClose() {
+    setShowLogout(false)
+  }
   return (
     <Row justify="space-between" align="middle">
       <a href="/">
         <img src={logo} alt="logo" height="40"></img>
       </a>
       <div>
-        <Button
-          type="link"
-          icon={<PlusOutlined />}
-          style={{ color: '#51CC71', marginRight: '30px' }}
-          onClick={() => setIsTxnModalVisible(true)}
-        >
-          Add New Transaction
-        </Button>
+        {
+          type === 'business' && (<Button
+                    type="link"
+                    icon={<PlusOutlined />}
+                    style={{ color: '#51CC71', marginRight: '30px' }}
+                    onClick={() => setIsTxnModalVisible(true)}
+                  >
+                    Add New Transaction
+                  </Button>
+          )
+        }
+        
         {!authContext.isAuthenticated() ? (
           <a href="/signup">
             <Button style={{ backgroundColor: '#51CC71', borderRadius: '5px' }} type="primary">
@@ -63,9 +73,12 @@ export default function Header({ setIsTxnModalVisible }) {
           <Avatar
             style={{ backgroundColor: '#00ff80' }}
             icon={<UserOutlined />}
-            onClick={setDrop}
+            onClick={() => {setShowLogout(true)}}
           />
         )}
+        {/* {
+          showLogout && (<LogoutModal handleModalClose={handleModalClose}/>)
+        } */}
       </div>
     </Row>
   );

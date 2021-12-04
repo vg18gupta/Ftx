@@ -3,20 +3,22 @@ import { Form, Input, Button, Select, DatePicker, InputNumber, Checkbox, Radio, 
 const { Option } = Select;
 
 const TransactionForm = ({ form, customersList = [] }) => {
-  const [ formUpdate, setFormUpdate] = useState(false)
-  console.log(customersList);
+  const [ currentTransactionValue, setCurrentTransactionValue] = useState(false)
   function handleChange() {
     const fieldValues = form.getFieldsValue();
-    if(fieldValues.transactionAmount > 1000 && fieldValues.redeem) {
+    if(currentTransactionValue > 1000 && fieldValues.redeem) {
       const redeemValue = fieldValues?.redeem;
       const currentReward = customersList?.find((item)=>item.phone===fieldValues?.customerId)?.reward;
       const amountToDeduct = (redeemValue/100) * currentReward;
-      const finalAmount = fieldValues.transactionAmount - amountToDeduct;
+      const finalAmount = currentTransactionValue - amountToDeduct;
       form.setFieldsValue({...fieldValues,transactionAmount:finalAmount,redeem:redeemValue})
     } else {
 
     }
-    setFormUpdate(true)
+    //setFormUpdate(true)
+  }
+  function handleTransactionValueChange(e) {
+      setCurrentTransactionValue(e.target.value);
   }
   return (
     <Form layout={'vertical'} form={form} name="transaction">
@@ -30,7 +32,7 @@ const TransactionForm = ({ form, customersList = [] }) => {
       <Form.Item label="Transaction Date" name="transactionDate" rules={[{ required: true }]}>
         <DatePicker style={{ width: '300px' }} />
       </Form.Item>
-      <Form.Item label="Transaction Amount" name="transactionAmount" rules={[{ required: true }]}>
+      <Form.Item label="Transaction Amount" name="transactionAmount" rules={[{ required: true }]} onChange={handleTransactionValueChange}>
         <InputNumber style={{ width: '300px' }} />
       </Form.Item>
       {
