@@ -34,10 +34,14 @@ export default function CustomerDashboard() {
     <LayoutWrapper>
       <div className="customer-dashboard-parent">
         <div className="customer-parent-children">
-          <Row>
-            {rewardData?.map(({ current_reward, shop_name }) => (
-              <RewardCard points={current_reward} shopName={shop_name} />
-            ))}
+          <Row justify="center">
+            {rewardData?.length ? (
+              rewardData.map(({ current_reward, shop_name }) => (
+                <RewardCard points={current_reward} shopName={shop_name} />
+              ))
+            ) : (
+              <RewardCard points={0} shopName={'No reward points collected'} />
+            )}
           </Row>
         </div>
       </div>
