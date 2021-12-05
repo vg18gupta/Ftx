@@ -12,7 +12,7 @@ const LayoutWrapper = ({ children, setIsTxnModalVisible }) => {
         <HeaderContent setIsTxnModalVisible={setIsTxnModalVisible} />
       </Header>
       <Content className="content">{children}</Content>
-      <Footer style={{marginTop:'auto'}} className="footer">&copy; 2021 Rewardo</Footer>
+      {/* <Footer style={{marginTop:'auto'}} className="footer">&copy; 2021 Rewardo</Footer> */}
     </Layout>
   );
 };
