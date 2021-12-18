@@ -5,6 +5,7 @@ const AddTransactionDialog = ({
   onAddTransaction,
   setIsModalVisible,
   customersList,
+  updateCustomersList,
   isLoading,
 }) => {
   const [form] = Form.useForm();
@@ -28,8 +29,13 @@ const AddTransactionDialog = ({
       okText="Add"
       onCancel={handleCancel}
       confirmLoading={isLoading}
+      width={700}
     >
-      <TransactionForm form={form} customersList={customersList} />
+      <TransactionForm
+        form={form}
+        customersList={customersList}
+        updateCustomersList={updateCustomersList}
+      />
     </Modal>
   );
 };

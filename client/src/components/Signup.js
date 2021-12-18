@@ -47,6 +47,7 @@ export default function SignUp() {
       email: signUp.email,
       type: signUp.type,
       phone: signUp.phonenumber,
+      isNotify: false
     };
     return fetch('/api/register', {
       method: 'POST',

@@ -8,7 +8,7 @@ import AddTransactionDialog from './AddTransactionDialog';
 import { openErrorNotification, openSuccessNotification } from '../Notification';
 import ChartContainer from './ChartContainer';
 
-export default function BusinessDashboard() {
+const BusinessDashboard = () => {
   const [searchText, setSearchText] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [customerData, setCustomerData] = useState([]);
@@ -110,6 +110,9 @@ export default function BusinessDashboard() {
     })
       .then((res) => {
         // getId();
+        if (!res.ok) {
+          return Promise.reject(res);
+        }
         loadData();
         openSuccessNotification('Transaction added succesfully💸');
         setIsModalVisible(false);
@@ -159,6 +162,7 @@ export default function BusinessDashboard() {
           setIsModalVisible={setIsModalVisible}
           onAddTransaction={postTransaction}
           customersList={allcustomerData}
+          updateCustomersList={getallcustomerData}
           isLoading={isTransactionLoading}
         />
       )}
@@ -182,4 +186,6 @@ export default function BusinessDashboard() {
       </LayoutWrapper>
     </>
   );
-}
+};
+
+export default BusinessDashboard;
