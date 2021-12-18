@@ -5,21 +5,27 @@ from flask_cors import CORS
 app = Flask(__name__,static_folder='client/build/',static_url_path='')
 CORS(app)
 
-# # Google Cloud SQL (change this accordingly)
-# PASSWORD ="Razorpay1234"
-# PUBLIC_IP_ADDRESS ="34.131.148.23"
-# DBNAME ="rewardo"
-# PROJECT_ID ="rewardo-333907"
-# INSTANCE_NAME ="rewardo-db"
-# CONNECTION_NAME = "rewardo-333907:asia-south2:rewardo-db"
+import vonage
+client = vonage.Client(key="", secret="")
+sms = vonage.Sms(client)
+def send_sms(phone):
+  print(phone)
+  responseData = sms.send_message(
+      {
+          "from": "Vonage APIs",
+          "to": phone,
+          "text": "Congrats!You received rewards for your recent TXN! Register at https://ftx-rewardo-client.herokuapp.com/ to claim your rewards.",
+      }
+  )
 
-# # configuration
-# app.config["SECRET_KEY"] = "Razorpay1234"
-# app.config["SQLALCHEMY_DATABASE_URI"]= "mysql+mysqldb://root:Razorpay1234@34.131.148.23/rewardo?unix_socket=/cloudsql/rewardo-333907:rewardo-db"
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
+  if responseData["messages"][0]["status"] == "0":
+      print("Message sent successfully.")
+  else:
+      print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+
 
 #Postgresql Addition
-app.config["SQLALCHEMY_DATABASE_URI"]= "postgresql+psycopg2://rkpjlmoxpdoipl:89dab57c92c4ed52a0f33cfa0659b72b70eb8e38f34b18b90f8b7777b10a1648@ec2-34-195-69-118.compute-1.amazonaws.com:5432/d2dm8684nrvlll"
+app.config["SQLALCHEMY_DATABASE_URI"]= ""
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 
 db.init_app(app)
@@ -32,9 +38,13 @@ with app.app_context():
 def register():
   user = request.get_json()
   print(user)
-  user = User(name = user["name"],email = user["email"], type=user["type"], phone=user["phone"])
-  db.session.add(user)
+  new_user = User(name = user["name"],email = user["email"], type=user["type"], phone=user["phone"])
+  db.session.add(new_user)
   db.session.commit()
+
+  if user["isNotify"]:
+    send_sms("91"+user["phone"])
+
   responseObject = {
       'status' : 'success',
       'message': 'Successfully registered.'
@@ -172,13 +182,6 @@ def transactions():
 def top_customers():
   top_customers = db.session.query(Reward).filter(Reward.businessId==request.args['business_id']).order_by(Reward.current_reward.desc()).limit(10).all()
   return jsonify(rewards_schema.dump(top_customers))
-
-
-# @app.route('/*')
-# def serve():
-#     print("in root route")
-#     return jsonify("hello from root")
-#     # return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/')
 @app.route('/signup')
