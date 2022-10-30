@@ -11,15 +11,11 @@
 <h3 align="center">Rewardo - The Reward app</h3>
 
   <p align="center">
-    This app was designed and coded during the FTX'21 Hackathon. Rewardo enables business owners to reward customers with reward points which any customer can avail 
-    for discounts.
-    <br />
-    <a href="https://ftx-rewardo-client.herokuapp.com/"><strong>Explore the App »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vg18gupta/Ftx">View Code</a>
+    <a href="https://github.com/Prateek7/ftx">View Code</a>
     ·
-    <a href="https://github.com/vg18gupta/Ftx/issues">Report Bug</a>
+    <a href="https://github.com/Prateek7/ftx/issues">Report Bug</a>
     ·
     <a href="https://github.com/vg18gupta/Ftx/pulls">Request Pulls</a>
   </p>
@@ -51,19 +47,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img width="933" alt="image" src="https://user-images.githubusercontent.com/34713296/144712202-04c8bd44-6ac4-4465-bdce-f454adadb44d.png">
-
-This project provides customers a compiled view of rewards from every business which uses our app. This mitigates the problem of having multiple reward cards from each and every major business and gives a chance for small businesses to compete with the major players. Offers can be also created based on Special occasions, Festivals or any way the business owner wants to.
+This project provides a deartmental store
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
-* [React.js](https://reactjs.org/)
 * [Flask](https://flask.palletsprojects.com/en/2.0.x/)
-* [Postgresql](https://www.postgresql.org/)
-* [Ant Design](https://ant.design/)
-* [Firebase](https://firebase.google.com/)
+* [SQLlite3](https://www.postgresql.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -81,22 +72,12 @@ This project provides customers a compiled view of rewards from every business w
    pip install -r requirements.txt
    flask run
    ```
-3. Start the React server - navigate into client directory and run - 
-   ```sh
-   npm install
-   npm start
-   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-This is the perfect app for small businesses to attract and retain customers with discounts, vouchers, cashbacks etc. We offer analytics calculated using purchase data. For example, you can use our API's to see which customers have the highest amount of transactions with your business or check how many purchases were done per day or the last month.  
-<br><br>
-<p align="center"><strong>Customer Page »</strong></p>
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/34713296/144714075-9f917c24-08f4-489d-9a69-d27d9e2a1180.png">
-<br><p align="center"><strong>Business Page »</strong></p>
-<img width="920" alt="business analytics" src="https://user-images.githubusercontent.com/34713296/144717009-a1c9dfc5-c165-413f-ad8f-f6eed9296130.png">
+This is the perfect app for small businesses to maintain customer records. 
 <br>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
